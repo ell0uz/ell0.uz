@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="ell0.uz — the personal domain of ell0. A starfield, a joke, and nothing else.">
+<meta name="description" content="ell0.uz — the personal domain of ell0. A starfield, a text, and nothing else.">
 <meta name="robots" content="index, follow">
 <meta name="theme-color" content="#07080d">
 <title>ell0.uz</title>
@@ -12,14 +12,14 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ell0.uz">
 <meta property="og:title" content="ell0.uz — personal domain">
-<meta property="og:description" content="A starfield, a joke, and nothing else.">
+<meta property="og:description" content="A starfield, a text, and nothing else.">
 <meta property="og:url" content="https://ell0.uz/">
 <meta property="og:image" content="https://ell0.uz/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="ell0.uz — personal domain">
-<meta name="twitter:description" content="A starfield, a joke, and nothing else.">
+<meta name="twitter:description" content="A starfield, a text, and nothing else.">
 <meta name="twitter:image" content="https://ell0.uz/og-image.png">
 <script type="application/ld+json">
 {
@@ -27,22 +27,22 @@
   "@type": "WebSite",
   "name": "ell0.uz",
   "url": "https://ell0.uz/",
-  "description": "The personal domain of ell0 — a starfield, a joke, and nothing else.",
+  "description": "The personal domain of ell0 — a starfield, socials, and nothing else.",
   "inLanguage": "en"
 }
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;800&family=Instrument+Serif:ital@1&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;800&family=VT323:wght@400&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
 <style>
   :root{
     --bg:#07080d;
     --ink:#f4f6fa;
-    --muted:rgba(244,246,250,.58);
-    --faint:rgba(244,246,250,.30);
-    --accent:#6ef3c5;
+    --muted:rgba(244,246,250,.78);
+    --faint:rgba(244,246,250,.60);
+    --accent:#0BA3FF;
     --font-display:'Unbounded',ui-sans-serif,system-ui,-apple-system,sans-serif;
-    --font-joke:'Instrument Serif',Georgia,'Times New Roman',serif;
+    --font-text:'VT323',Georgia,'Times New Roman',serif;
     --font-mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
   }
   *{margin:0;padding:0;box-sizing:border-box}
@@ -64,7 +64,7 @@
   main{
     position:relative;z-index:2;
     display:flex;flex-direction:column;align-items:center;
-    gap:clamp(22px,4.5vh,44px);
+    gap:clamp(30px,4.5vh,44px);
     padding:0 24px;text-align:center;
   }
   .eyebrow{
@@ -103,23 +103,32 @@
   }
   .tld .ltr{color:var(--accent)}
   .tld .ltr.settled:hover{color:var(--ink);text-shadow:0 0 28px rgba(244,246,250,.35)}
-  .joke-wrap{
+  .text-wrap{
     display:flex;flex-direction:column;align-items:center;
     opacity:0;animation:fadeUp .9s ease 1s forwards;
   }
-  .joke{
-    font-family:var(--font-joke);font-style:italic;
+  .text{
+    font-family:var(--font-text);
     font-size:clamp(1.15rem,2.6vw,1.65rem);
     color:var(--muted);max-width:36ch;line-height:1.45;
     text-wrap:pretty;cursor:pointer;overflow:hidden;
     transition:opacity .45s ease,transform .45s ease,height .45s ease,color .3s ease;
   }
-  .joke:hover{color:var(--ink)}
-  .joke.swap{opacity:0;transform:translateY(12px)}
+  .text:hover{color:var(--ink)}
+  .text.swap{opacity:0;transform:translateY(12px)}
   .hint{
     margin-top:16px;
     font-family:var(--font-mono);font-size:.62rem;
     letter-spacing:.22em;text-transform:uppercase;color:var(--faint);
+    text-decoration:none;cursor:pointer;
+    transition:color .3s ease,letter-spacing .3s ease,transform .3s ease;
+  }
+  .hint:visited{color:var(--faint)}
+  .hint:focus-visible{outline:1px solid var(--accent);outline-offset:3px}
+  .hint:hover{
+    color:var(--ink);
+    letter-spacing:.34em;
+    transform:translateY(-2px);
   }
   .foot{
     position:fixed;left:0;right:0;bottom:22px;z-index:2;
@@ -132,9 +141,9 @@
   @keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
   @keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
   @media (prefers-reduced-motion:reduce){
-    .domain,.eyebrow,.joke-wrap,.eyebrow .dot{animation:none!important;opacity:1!important;transform:none!important}
+    .domain,.eyebrow,.text-wrap,.eyebrow .dot{animation:none!important;opacity:1!important;transform:none!important}
     .ltr{animation:none!important;opacity:1!important;transform:none!important}
-    .joke{transition:none}
+    .text,.hint{transition:none}
   }
 </style>
 </head>
@@ -144,9 +153,11 @@
 <main>
   <p class="eyebrow"><span class="dot"></span><span>personal domain</span></p>
   <h1 class="domain" aria-label="ell0.uz"><span class="ltr" style="--i:0">e</span><span class="ltr" style="--i:1">l</span><span class="ltr" style="--i:2">l</span><span class="ltr" style="--i:3">0</span><span class="tld"><span class="ltr" style="--i:4">.</span><span class="ltr" style="--i:5">u</span><span class="ltr" style="--i:6">z</span></span></h1>
-  <div class="joke-wrap">
-    <p class="joke" id="joke" role="button" tabindex="0" title="Click for another joke">Why do programmers prefer dark mode? Because light attracts bugs.</p>
-    <span class="hint">click for another joke</span>
+  <div class="text-wrap">
+    <p class="text" id="text" role="button" tabindex="0" title="Click for another text">Why do programmers prefer dark mode? Because light attracts bugs.</p>
+    <a class="hint" href="https://discord.com/users/938080309730246677" target="_blank" rel="noopener">Discord: @ell0uz</a>
+    <a class="hint" href="https://t.me/ell0uz" target="_blank" rel="noopener">Telegram: @ell0uz</a>
+    <a class="hint" href="mailto:ell@ell0.uz">E-mail: ell@ell0.uz</a>
   </div>
 </main>
 <footer class="foot">© 2026 ell0.uz</footer>
@@ -239,43 +250,44 @@
   resize();
   requestAnimationFrame(draw);
 
-  /* ---------- rotating joke, bottom of center ---------- */
-  const jokes = [
-    /* Delay the jokes thing */
+  /* ---------- rotating texts, bottom of center ---------- */
+  const texts = [
+    /* Delay the texts thing */
     "",
-    "Why do programmers prefer dark mode? Because light attracts bugs.",
-    "I'd tell you a UDP joke, but you might not get it.",
-    "There are 10 kinds of people: those who understand binary and those who don't.",
-    "Why did the developer go broke? He used up all his cache.",
-    "A SQL query walks into a bar, sees two tables and asks, \u201CMind if I join you?\u201D",
-    "Parallel lines have so much in common. It's a shame they'll never meet.",
-    "Best Pastebin alternative: bin.ell0.uz"
+    "meow",
+    "this is my domain dont ya know!!",
+    "🇺🇿",
+    "wip",
+    "Best Pastebin alternative: bin.ell0.uz",
+    "yea this thing better shut up",
+    "",
+    "",
   ];
-  const jokeEl = document.getElementById('joke');
+  const textEl = document.getElementById('text');
   let ji = 0, timer = null;
   function next() {
-    ji = (ji + 1) % jokes.length;
-    const h0 = jokeEl.offsetHeight;          // height of the current joke
-    jokeEl.classList.add('swap');             // fade/slide out
+    ji = (ji + 1) % texts.length;
+    const h0 = textEl.offsetHeight;          // height of the current text
+    textEl.classList.add('swap');             // fade/slide out
     setTimeout(() => {
-      jokeEl.textContent = jokes[ji];
-      const h1 = jokeEl.offsetHeight;        // natural height of the new joke
-      jokeEl.classList.remove('swap');       // fade/slide in
+      textEl.textContent = texts[ji];
+      const h1 = textEl.offsetHeight;        // natural height of the new text
+      textEl.classList.remove('swap');       // fade/slide in
       if (RM) return;
       // animate the height from old to new so line-count changes glide
-      jokeEl.style.height = h0 + 'px';
-      void jokeEl.offsetHeight;              // force reflow
-      jokeEl.style.height = h1 + 'px';
-      setTimeout(() => { jokeEl.style.height = ''; }, 500);  // release to auto
+      textEl.style.height = h0 + 'px';
+      void textEl.offsetHeight;              // force reflow
+      textEl.style.height = h1 + 'px';
+      setTimeout(() => { textEl.style.height = ''; }, 500);  // release to auto
     }, 450);
   }
   function arm() {
     clearInterval(timer);
     if (!RM) timer = setInterval(next, 6000);
   }
-  jokeEl.textContent = jokes[0];
-  jokeEl.addEventListener('click', () => { next(); arm(); });
-  jokeEl.addEventListener('keydown', e => {
+  textEl.textContent = texts[0];
+  textEl.addEventListener('click', () => { next(); arm(); });
+  textEl.addEventListener('keydown', e => {
     if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); next(); arm(); }
   });
   arm();
