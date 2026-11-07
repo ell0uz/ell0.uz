@@ -1,0 +1,15 @@
+services:
+  web:
+    image: nginx:alpine
+    container_name: ell0-uz
+    ports:
+      - "${PORT:-80}:80"
+    volumes:
+      - ./:/usr/share/nginx/html:ro
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "-q", "--spider", "http://localhost/"]
+      interval: 30s
+      timeout: 3s
+      retries: 3

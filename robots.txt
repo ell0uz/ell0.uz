@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://ell0.uz/sitemap.xml
