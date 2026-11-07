@@ -111,8 +111,8 @@
     font-family:var(--font-joke);font-style:italic;
     font-size:clamp(1.15rem,2.6vw,1.65rem);
     color:var(--muted);max-width:36ch;line-height:1.45;
-    text-wrap:pretty;cursor:pointer;
-    transition:opacity .45s ease,transform .45s ease,color .3s ease;
+    text-wrap:pretty;cursor:pointer;overflow:hidden;
+    transition:opacity .45s ease,transform .45s ease,height .45s ease,color .3s ease;
   }
   .joke:hover{color:var(--ink)}
   .joke.swap{opacity:0;transform:translateY(12px)}
@@ -252,10 +252,18 @@
   let ji = 0, timer = null;
   function next() {
     ji = (ji + 1) % jokes.length;
-    jokeEl.classList.add('swap');
+    const h0 = jokeEl.offsetHeight;          // height of the current joke
+    jokeEl.classList.add('swap');             // fade/slide out
     setTimeout(() => {
       jokeEl.textContent = jokes[ji];
-      jokeEl.classList.remove('swap');
+      const h1 = jokeEl.offsetHeight;        // natural height of the new joke
+      jokeEl.classList.remove('swap');       // fade/slide in
+      if (RM) return;
+      // animate the height from old to new so line-count changes glide
+      jokeEl.style.height = h0 + 'px';
+      void jokeEl.offsetHeight;              // force reflow
+      jokeEl.style.height = h1 + 'px';
+      setTimeout(() => { jokeEl.style.height = ''; }, 500);  // release to auto
     }, 450);
   }
   function arm() {
