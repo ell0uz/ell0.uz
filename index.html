@@ -64,7 +64,7 @@
   main{
     position:relative;z-index:2;
     display:flex;flex-direction:column;align-items:center;
-    gap:clamp(30px,4.5vh,44px);
+    gap:clamp(0px,2.5vh,26px);
     padding:0 24px;text-align:center;
   }
   .eyebrow{
@@ -86,16 +86,14 @@
     font-weight:800;line-height:1;
     font-size:clamp(2.4rem,12vw,9rem);
     letter-spacing:-.02em;
-    animation:floaty 7s ease-in-out infinite;
   }
   .ltr{
     display:inline-block;
-    opacity:0;transform:translateY(48px) rotate(6deg);
-    animation:rise .9s cubic-bezier(.2,.75,.25,1) forwards;
-    animation-delay:calc(.25s + var(--i)*.065s);
+    opacity:0;
+    animation:rise 1s ease-out forwards, wave 6s ease-in-out infinite;
+    animation-delay:calc(.25s + var(--i)*.08s), calc(var(--i)*-.8s);
     transition:transform .35s cubic-bezier(.2,.75,.25,1),color .3s ease,text-shadow .3s ease;
   }
-  .ltr.settled{animation:none;opacity:1;transform:none}
   .ltr.settled:hover{
     transform:translateY(-10px);
     color:var(--accent);
@@ -105,6 +103,7 @@
   .tld .ltr.settled:hover{color:var(--ink);text-shadow:0 0 28px rgba(244,246,250,.35)}
   .text-wrap{
     display:flex;flex-direction:column;align-items:center;
+    margin-top:clamp(-12px,-1.5vh,-6px); /* negative margin: pull text up toward the wordmark */
     opacity:0;animation:fadeUp .9s ease 1s forwards;
   }
   .text{
@@ -136,9 +135,9 @@
     font-family:var(--font-mono);font-size:.62rem;
     letter-spacing:.22em;text-transform:uppercase;color:var(--faint);
   }
-  @keyframes rise{to{opacity:1;transform:translateY(0) rotate(0)}}
+  @keyframes rise{from{opacity:0}to{opacity:1}}
   @keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
-  @keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
+  @keyframes wave{0%,100%{translate:0 0;rotate:0deg}50%{translate:0 -4px;rotate:1.5deg}}
   @keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
   @media (prefers-reduced-motion:reduce){
     .domain,.eyebrow,.text-wrap,.eyebrow .dot{animation:none!important;opacity:1!important;transform:none!important}
@@ -152,7 +151,7 @@
 <div class="grain" aria-hidden="true"></div>
 <main>
   <p class="eyebrow"><span class="dot"></span><span>personal domain</span></p>
-  <h1 class="domain" aria-label="ell0.uz"><span class="ltr" style="--i:0">e</span><span class="ltr" style="--i:1">l</span><span class="ltr" style="--i:2">l</span><span class="ltr" style="--i:3">0</span><span class="tld"><span class="ltr" style="--i:4">.</span><span class="ltr" style="--i:5">u</span><span class="ltr" style="--i:6">z</span></span></h1>
+  <h1 class="domain" aria-label="ell0.uz"><span class="ltr" style="--i:0">e</span><span class="ltr" style="--i:1">l</span><span class="ltr" style="--i:2">l</span><span class="ltr lamp" id="lamp" style="--i:3">0</span><span class="tld"><span class="ltr" style="--i:4">.</span><span class="ltr" style="--i:5">u</span><span class="ltr" style="--i:6">z</span></span></h1>
   <div class="text-wrap">
     <p class="text" id="text" role="button" tabindex="0" title="Click for another text">Why do programmers prefer dark mode? Because light attracts bugs.</p>
     <a class="hint" href="https://discord.com/users/938080309730246677" target="_blank" rel="noopener">Discord: @ell0uz</a>
@@ -296,6 +295,29 @@
   document.querySelectorAll('.ltr').forEach(el =>
     el.addEventListener('animationend', () => el.classList.add('settled'), { once: true })
   );
+
+  /* ---------- the "0" flickers like a broken lamp: randomized WAAPI bursts ----------
+     Each burst = random opacity keyframes + random duration + random easing per
+     segment, chained via onfinish, so no two flickers are ever the same. */
+  const lamp = document.getElementById('lamp');
+  const EASINGS = ['ease-in-out', 'ease-out', 'ease-in', 'linear', 'cubic-bezier(.6,0,.9,.4)', 'steps(2,end)', 'steps(3,end)'];
+  const randEasing = () => EASINGS[Math.floor(Math.random() * EASINGS.length)];
+  function lampFlicker() {
+    if (RM) return;
+    if (Math.random() < 0.55) {                       // steady stretch
+      setTimeout(lampFlicker, 200 + Math.random() * 1200);
+      return;
+    }
+    const n = 2 + Math.floor(Math.random() * 4);      // burst length
+    const kf = [{ opacity: 1, easing: randEasing() }];
+    for (let k = 0; k < n; k++) {
+      kf.push({ opacity: +(Math.random() < 0.5 ? 0.05 + Math.random() * 0.3 : 0.5 + Math.random() * 0.5).toFixed(2) });
+    }
+    kf.push({ opacity: 1 });
+    const anim = lamp.animate(kf, { duration: 120 + Math.random() * 450, easing: 'ease-in-out', fill: 'none' });
+    anim.onfinish = () => lampFlicker();
+  }
+  setTimeout(lampFlicker, 1700);                      // start after the entrance fade
 })();
 </script>
 </body>
