@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="ell0.uz — the personal domain of ell0. A starfield, a text, and nothing else.">
+<meta name="description" content="ell0.uz — the personal domain of ell0. A starfield, my socials, and nothing else.">
 <meta name="robots" content="index, follow">
 <meta name="theme-color" content="#07080d">
 <title>ell0.uz</title>
@@ -27,7 +27,7 @@
   "@type": "WebSite",
   "name": "ell0.uz",
   "url": "https://ell0.uz/",
-  "description": "The personal domain of ell0 — a starfield, socials, and nothing else.",
+  "description": "The personal domain of ell0 — a starfield, my socials, and nothing else.",
   "inLanguage": "en"
 }
 </script>
@@ -46,14 +46,14 @@
     --font-mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
   }
   *{margin:0;padding:0;box-sizing:border-box}
-  html,body{height:100%}
+  html{height:100%}
+  @media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
   body{
+    min-height:100%;
     background:var(--bg);
     color:var(--ink);
     font-family:var(--font-display);
-    overflow:hidden;
-    display:grid;
-    place-items:center;
+    overflow-x:hidden;
     -webkit-font-smoothing:antialiased;
   }
   #bg{position:fixed;inset:0;z-index:0;display:block}
@@ -63,9 +63,10 @@
   }
   main{
     position:relative;z-index:2;
-    display:flex;flex-direction:column;align-items:center;
+    min-height:100vh;min-height:100svh;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
     gap:clamp(0px,2.5vh,26px);
-    padding:0 24px;text-align:center;
+    padding:48px 24px 96px;text-align:center;
   }
   .eyebrow{
     display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:12px;
@@ -130,11 +131,45 @@
     transform:translateY(-2px);
   }
   .foot{
-    position:fixed;left:0;right:0;bottom:22px;z-index:2;
+    position:relative;z-index:2;
     text-align:center;pointer-events:none;
+    padding:0 24px 26px;
     font-family:var(--font-mono);font-size:.62rem;
     letter-spacing:.22em;text-transform:uppercase;color:var(--faint);
   }
+  /* ---------- moving scroll cue at the bottom of the hero ---------- */
+  .scroll-cue{
+    position:fixed;left:50%;bottom:20px;transform:translateX(-50%);z-index:3;
+    display:flex;flex-direction:column;align-items:center;gap:10px;
+    font-family:var(--font-mono);font-size:.62rem;letter-spacing:.3em;text-transform:uppercase;
+    color:var(--faint);text-decoration:none;cursor:pointer;
+    transition:opacity .45s ease,color .3s ease;
+  }
+  .scroll-cue:hover{color:var(--ink)}
+  .scroll-cue:focus-visible{outline:1px solid var(--accent);outline-offset:3px}
+  .scroll-cue.hide{opacity:0;pointer-events:none}
+  .cue-track{position:relative;width:1px;height:44px;background:rgba(244,246,250,.16);overflow:hidden}
+  .cue-dot{
+    position:absolute;left:-1.5px;top:0;width:4px;height:10px;border-radius:2px;
+    background:var(--accent);box-shadow:0 0 10px 1px rgba(11,163,255,.6);
+    animation:cueDrop 1.8s cubic-bezier(.45,0,.55,1) infinite;
+  }
+  @keyframes cueDrop{0%{transform:translateY(-12px);opacity:0}20%{opacity:1}100%{transform:translateY(46px);opacity:0}}
+  /* ---------- about section ---------- */
+  #about{position:relative;z-index:2;display:flex;justify-content:center;padding:14vh 24px 6vh}
+  .about-inner{width:min(90vw,72ch);display:flex;flex-direction:column;align-items:flex-start;gap:clamp(16px,3vh,28px);text-align:left}
+  .about-eyebrow{display:flex;align-items:center;gap:12px;font-family:var(--font-display);font-weight:500;font-size:clamp(.8rem,1.9vw,.98rem);letter-spacing:.04em;color:var(--muted)}
+  .about-title{font-weight:800;line-height:1.05;letter-spacing:-.02em;font-size:clamp(2.2rem,7.5vw,5rem)}
+  .about-title .accent{color:var(--accent)}
+  .about-sub{font-weight:500;font-size:clamp(1.25rem,3.2vw,1.9rem);letter-spacing:-.01em;color:var(--ink)}
+  .about-p{font-family:var(--font-text);font-weight:400;font-size:clamp(1rem,2vw,1.2rem);color:var(--muted);max-width:62ch;line-height:1.6;text-wrap:pretty}
+  .about-links{display:flex;flex-wrap:wrap;gap:12px 28px}
+  .about-links .hint{margin-top:0}
+  .inline-link{color:var(--accent);text-decoration:none;border-bottom:1px solid rgba(11,163,255,.4);transition:color .3s ease,border-color .3s ease}
+  .inline-link:hover{color:var(--ink);border-color:var(--ink)}
+  /* ---------- reveal on scroll: big headers first, paragraphs after, sliding up from the bottom ---------- */
+  .reveal{opacity:0;transform:translateY(44px);transition:opacity .8s ease var(--d,0s),transform .8s cubic-bezier(.2,.75,.25,1) var(--d,0s)}
+  .reveal.in{opacity:1;transform:translateY(0)}
   @keyframes rise{from{opacity:0}to{opacity:1}}
   @keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
   @keyframes wave{0%,100%{translate:0 0;rotate:0deg}50%{translate:0 -4px;rotate:1.5deg}}
@@ -143,6 +178,8 @@
     .domain,.eyebrow,.text-wrap,.eyebrow .dot{animation:none!important;opacity:1!important;transform:none!important}
     .ltr{animation:none!important;opacity:1!important;transform:none!important}
     .text,.hint{transition:none}
+    .cue-dot{animation:none!important;transform:translateY(18px);opacity:.9}
+    .reveal{opacity:1!important;transform:none!important;transition:none!important}
   }
 </style>
 </head>
@@ -159,6 +196,24 @@
     <a class="hint" href="mailto:ell@ell0.uz">E-mail: ell@ell0.uz</a>
   </div>
 </main>
+<a class="scroll-cue" href="#about" aria-label="Scroll down to the about section">
+  <span>scroll</span>
+  <span class="cue-track" aria-hidden="true"><span class="cue-dot"></span></span>
+</a>
+<section id="about" aria-label="About me">
+  <div class="about-inner">
+    <p class="about-eyebrow reveal" style="--d:0s"><span class="dot"></span><span>about me</span></p>
+    <h2 class="about-title reveal" style="--d:.08s">hi, i'm <span class="accent">ell0</span>.</h2>
+    <p class="about-p reveal" style="--d:.22s">i build small things for the internet and keep them on this domain — a starfield, some words, and my handles. nothing more, nothing less.</p>
+    <p class="about-p reveal" style="--d:.34s">i write code, run <a class="inline-link" href="https://bin.ell0.uz" target="_blank" rel="noopener">bin.ell0.uz</a> (a pastebin alternative), and poke at whatever i'm curious about. 🇺🇿</p>
+    <h3 class="about-sub reveal" style="--d:.46s">elsewhere</h3>
+    <div class="about-links reveal" style="--d:.56s">
+      <a class="hint" href="https://discord.com/users/938080309730246677" target="_blank" rel="noopener">Discord: @ell0uz</a>
+      <a class="hint" href="https://t.me/ell0uz" target="_blank" rel="noopener">Telegram: @ell0uz</a>
+      <a class="hint" href="mailto:ell@ell0.uz">E-mail: ell@ell0.uz</a>
+    </div>
+  </div>
+</section>
 <footer class="foot">© 2026 ell0.uz</footer>
 <script>
 (() => {
@@ -318,6 +373,25 @@
     anim.onfinish = () => lampFlicker();
   }
   setTimeout(lampFlicker, 1700);                      // start after the entrance fade
+
+  /* ---------- scroll cue: hide once the hero is scrolled past ---------- */
+  const cue = document.querySelector('.scroll-cue');
+  const onScroll = () => cue.classList.toggle('hide', window.scrollY > window.innerHeight * 0.35);
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  /* ---------- about: reveal from the bottom on scroll, headers first, then paragraphs ---------- */
+  const revealEls = document.querySelectorAll('.reveal');
+  if (RM) {
+    revealEls.forEach(el => el.classList.add('in'));
+  } else {
+    const io = new IntersectionObserver(entries => {
+      for (const e of entries) {
+        if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+      }
+    }, { threshold: 0.15 });
+    revealEls.forEach(el => io.observe(el));
+  }
 })();
 </script>
 </body>
