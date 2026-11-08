@@ -156,7 +156,7 @@
   }
   @keyframes cueDrop{0%{transform:translateY(-12px);opacity:0}20%{opacity:1}100%{transform:translateY(46px);opacity:0}}
   /* ---------- about section ---------- */
-  #about{position:relative;z-index:2;display:flex;justify-content:center;padding:14vh 24px 6vh}
+  #about{position:relative;z-index:2;display:flex;justify-content:flex-start;padding:14vh 24px 6vh clamp(24px,6vw,96px)}
   .about-inner{width:min(90vw,72ch);display:flex;flex-direction:column;align-items:flex-start;gap:clamp(16px,3vh,28px);text-align:left}
   .about-eyebrow{display:flex;align-items:center;gap:12px;font-family:var(--font-display);font-weight:500;font-size:clamp(.8rem,1.9vw,.98rem);letter-spacing:.04em;color:var(--muted)}
   .about-title{font-weight:800;line-height:1.05;letter-spacing:-.02em;font-size:clamp(2.2rem,7.5vw,5rem)}
@@ -203,7 +203,7 @@
 <section id="about" aria-label="About me">
   <div class="about-inner">
     <p class="about-eyebrow reveal" style="--d:0s"><span class="dot"></span><span>about me</span></p>
-    <h2 class="about-title reveal" style="--d:.08s">hi, i'm <span class="accent">ell</span>.</h2>
+    <h2 class="about-title reveal" style="--d:.08s">hi, i'm <span class="accent">ell</span>!</h2>
     <p class="about-p reveal" style="--d:.22s">i build small things for the internet and keep them on this domain — a starfield, some words, and my handles. nothing more, nothing less.</p>
     <p class="about-p reveal" style="--d:.34s">i write code, run <a class="inline-link" href="https://bin.ell0.uz" target="_blank" rel="noopener">bin.ell0.uz</a> (a pastebin alternative), and poke at whatever i'm curious about. 🇺🇿</p>
     <h3 class="about-sub reveal" style="--d:.46s">elsewhere</h3>
