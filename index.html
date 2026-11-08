@@ -188,7 +188,7 @@
 <div class="grain" aria-hidden="true"></div>
 <main>
   <p class="eyebrow"><span class="dot"></span><span>personal domain</span></p>
-  <h1 class="domain" aria-label="ell0.uz"><span class="ltr" style="--i:0">e</span><span class="ltr" style="--i:1">l</span><span class="ltr" style="--i:2">l</span><span class="ltr lamp" id="lamp" style="--i:3">0</span><span class="tld"><span class="ltr" style="--i:4">.</span><span class="ltr" style="--i:5">u</span><span class="ltr" style="--i:6">z</span></span></h1>
+  <h1 class="domain" aria-label="ell0.uz"><span class="ltr" style="--i:0">e</span><span class="ltr flicker" style="--i:1">l</span><span class="ltr flicker" style="--i:2">l</span><span class="ltr lamp" id="lamp" style="--i:3">0</span><span class="tld"><span class="ltr" style="--i:4">.</span><span class="ltr" style="--i:5">u</span><span class="ltr" style="--i:6">z</span></span></h1>
   <div class="text-wrap">
     <p class="text" id="text" role="button" tabindex="0" title="Click for another text">Why do programmers prefer dark mode? Because light attracts bugs.</p>
     <a class="hint" href="https://discord.com/users/938080309730246677" target="_blank" rel="noopener">Discord: @ell0uz</a>
@@ -203,7 +203,7 @@
 <section id="about" aria-label="About me">
   <div class="about-inner">
     <p class="about-eyebrow reveal" style="--d:0s"><span class="dot"></span><span>about me</span></p>
-    <h2 class="about-title reveal" style="--d:.08s">hi, i'm <span class="accent">ell0</span>.</h2>
+    <h2 class="about-title reveal" style="--d:.08s">hi, i'm <span class="accent">ell</span>.</h2>
     <p class="about-p reveal" style="--d:.22s">i build small things for the internet and keep them on this domain — a starfield, some words, and my handles. nothing more, nothing less.</p>
     <p class="about-p reveal" style="--d:.34s">i write code, run <a class="inline-link" href="https://bin.ell0.uz" target="_blank" rel="noopener">bin.ell0.uz</a> (a pastebin alternative), and poke at whatever i'm curious about. 🇺🇿</p>
     <h3 class="about-sub reveal" style="--d:.46s">elsewhere</h3>
@@ -373,6 +373,27 @@
     anim.onfinish = () => lampFlicker();
   }
   setTimeout(lampFlicker, 1700);                      // start after the entrance fade
+
+  /* ---------- the two "l"s flicker as well — same randomized WAAPI bursts, but each letter
+     runs its own independent loop with a staggered start, so they never flicker in sync ---------- */
+  document.querySelectorAll('.ltr.flicker').forEach((el, idx) => {
+    function lFlicker() {
+      if (RM) return;
+      if (Math.random() < 0.55) {                     // steady stretch
+        setTimeout(lFlicker, 200 + Math.random() * 1200);
+        return;
+      }
+      const n = 2 + Math.floor(Math.random() * 4);    // burst length
+      const kf = [{ opacity: 1, easing: randEasing() }];
+      for (let k = 0; k < n; k++) {
+        kf.push({ opacity: +(Math.random() < 0.5 ? 0.05 + Math.random() * 0.3 : 0.5 + Math.random() * 0.5).toFixed(2) });
+      }
+      kf.push({ opacity: 1 });
+      const anim = el.animate(kf, { duration: 120 + Math.random() * 450, easing: 'ease-in-out', fill: 'none' });
+      anim.onfinish = () => lFlicker();
+    }
+    setTimeout(lFlicker, 1700 + idx * 700 + Math.random() * 900);
+  });
 
   /* ---------- scroll cue: hide once the hero is scrolled past ---------- */
   const cue = document.querySelector('.scroll-cue');
