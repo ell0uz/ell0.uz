@@ -31,10 +31,13 @@
   "inLanguage": "en"
 }
 </script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;800&family=Space+Grotesk:wght@400;500&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
 <style>
+  /* self-hosted fonts — font-display:swap keeps text visible while they load */
+  @font-face{font-family:'Unbounded';src:url('./Unbounded-Medium.ttf') format('truetype');font-weight:500;font-style:normal;font-display:swap}
+  @font-face{font-family:'Unbounded';src:url('./Unbounded-ExtraBold.ttf') format('truetype');font-weight:800;font-style:normal;font-display:swap}
+  @font-face{font-family:'Space Grotesk';src:url('./SpaceGrotesk-Regular.ttf') format('truetype');font-weight:400;font-style:normal;font-display:swap}
+  @font-face{font-family:'Space Grotesk';src:url('./SpaceGrotesk-Medium.ttf') format('truetype');font-weight:500;font-style:normal;font-display:swap}
+  @font-face{font-family:'JetBrains Mono';src:url('./JetBrainsMono-Regular.ttf') format('truetype');font-weight:400;font-style:normal;font-display:swap}
   :root{
     --bg:#07080d;
     --ink:#f4f6fa;
