@@ -1,0 +1,96 @@
+/* ---------- reveal on scroll: big headers first, paragraphs after, sliding up from the bottom ---------- */
+.reveal {
+  opacity: 0;
+  transform: translateY(44px);
+  transition:
+    opacity 0.8s ease var(--d, 0s),
+    transform 0.8s cubic-bezier(0.2, 0.75, 0.25, 1) var(--d, 0s);
+}
+.reveal.in {
+  opacity: 1;
+  transform: translateY(0);
+}
+@keyframes rise {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes wave {
+  0%,
+  100% {
+    translate: 0 0;
+    rotate: 0deg;
+  }
+  50% {
+    translate: 0 -4px;
+    rotate: 1.5deg;
+  }
+}
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.35;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .domain,
+  .eyebrow,
+  .text-wrap,
+  .eyebrow .dot {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  .ltr {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  .text,
+  .hint {
+    transition: none;
+  }
+  .cue-dot {
+    animation: none !important;
+    transform: translateY(18px);
+    opacity: 0.9;
+  }
+  .reveal {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+  .about-inner .dot {
+    animation: none !important;
+  }
+  .about-inner {
+    transition: none !important;
+    transform: none !important;
+  }
+  .about-inner::before {
+    display: none;
+  }
+  .about-inner.pressing::after {
+    animation: none !important;
+  }
+  body,
+  #bg {
+    transition: none !important;
+  }
+}

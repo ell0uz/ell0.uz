@@ -1,37 +1,64 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="dark">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="ell0.uz — the personal domain of ell, About me/portfolio site."
+      content="The personal site of ell, exploring web design, developer tooling, and polished interactive digital experiences."
     />
+    <meta name="author" content="ell" />
     <meta name="robots" content="index, follow" />
     <meta name="theme-color" content="#07080d" />
-    <title>ell0.uz</title>
+    <title>ell — Personal Portfolio &amp; Web Design | ell0.uz</title>
     <link rel="canonical" href="https://ell0.uz/" />
     <link rel="icon" href="favicon.svg" type="image/svg+xml" />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="ell0.uz" />
-    <meta property="og:title" content="ell0.uz - personal domain" />
-    <meta property="og:description" content="About me/portfolio site" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:title" content="ell — Personal Portfolio &amp; Web Design | ell0.uz" />
+    <meta
+      property="og:description"
+      content="The personal site of ell, exploring web design, developer tooling, and polished interactive digital experiences."
+    />
     <meta property="og:url" content="https://ell0.uz/" />
     <meta property="og:image" content="https://ell0.uz/og-image.png" />
+    <meta property="og:image:alt" content="Preview of ell's personal portfolio at ell0.uz" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="ell0.uz - personal domain" />
-    <meta name="twitter:description" content="About me/portfolio site" />
+    <meta name="twitter:title" content="ell — Personal Portfolio &amp; Web Design | ell0.uz" />
+    <meta
+      name="twitter:description"
+      content="The personal site of ell, exploring web design, developer tooling, and polished interactive digital experiences."
+    />
     <meta name="twitter:image" content="https://ell0.uz/og-image.png" />
+    <meta name="twitter:image:alt" content="Preview of ell's personal portfolio at ell0.uz" />
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
-        "@type": "WebSite",
-        "name": "ell0.uz",
-        "url": "https://ell0.uz/",
-        "description": "About me/portfolio site",
-        "inLanguage": "en"
+        "@graph": [
+          {
+            "@type": "WebSite",
+            "@id": "https://ell0.uz/#website",
+            "name": "ell0.uz",
+            "url": "https://ell0.uz/",
+            "description": "The personal site of ell, exploring web design, developer tooling, and polished interactive digital experiences.",
+            "publisher": { "@id": "https://ell0.uz/#person" },
+            "inLanguage": "en"
+          },
+          {
+            "@type": "Person",
+            "@id": "https://ell0.uz/#person",
+            "name": "ell",
+            "url": "https://ell0.uz/",
+            "sameAs": [
+              "https://github.com/ell0uz",
+              "https://t.me/ell0uz",
+              "https://discord.com/users/938080309730246677"
+            ]
+          }
+        ]
       }
     </script>
     <!-- self-hosted fonts used above the fold: preload so they start with the HTML parse.
@@ -42,517 +69,33 @@
     <link rel="preload" href="./Unbounded-Medium.ttf" as="font" type="font/ttf" crossorigin />
     <link rel="preload" href="./SpaceGrotesk-Medium.ttf" as="font" type="font/ttf" crossorigin />
     <link rel="preload" href="./JetBrainsMono-Regular.ttf" as="font" type="font/ttf" crossorigin />
-    <style>
-      /* self-hosted fonts — font-display:swap keeps text visible while they load */
-      @font-face {
-        font-family: 'Unbounded';
-        src: url('./Unbounded-Medium.ttf') format('truetype');
-        font-weight: 500;
-        font-style: normal;
-        font-display: swap;
-      }
-      @font-face {
-        font-family: 'Unbounded';
-        src: url('./Unbounded-ExtraBold.ttf') format('truetype');
-        font-weight: 800;
-        font-style: normal;
-        font-display: swap;
-      }
-      @font-face {
-        font-family: 'Space Grotesk';
-        src: url('./SpaceGrotesk-Regular.ttf') format('truetype');
-        font-weight: 400;
-        font-style: normal;
-        font-display: swap;
-      }
-      @font-face {
-        font-family: 'Space Grotesk';
-        src: url('./SpaceGrotesk-Medium.ttf') format('truetype');
-        font-weight: 500;
-        font-style: normal;
-        font-display: swap;
-      }
-      @font-face {
-        font-family: 'JetBrains Mono';
-        src: url('./JetBrainsMono-Regular.ttf') format('truetype');
-        font-weight: 400;
-        font-style: normal;
-        font-display: swap;
-      }
-      :root {
-        --bg: #07080d;
-        --bg-alt: #01ccd7; /* scrolled page: solid bright cyan */
-        --card-bg: rgba(11, 37, 64, 0.55); /* frosted card over the dark sky */
-        --ink: #f4f6fa;
-        --muted: rgba(244, 246, 250, 0.78);
-        --faint: rgba(244, 246, 250, 0.6);
-        --accent: #0ba3ff;
-        --font-display: 'Unbounded', ui-sans-serif, system-ui, -apple-system, sans-serif;
-        --font-text: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
-        --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
-      }
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-      html {
-        height: 100%;
-      }
-      @media (prefers-reduced-motion: no-preference) {
-        html {
-          scroll-behavior: smooth;
-        }
-      }
-      body {
-        min-height: 100%;
-        background: var(--bg);
-        transition: background-color 0.7s ease;
-        color: var(--ink);
-        font-family: var(--font-display);
-        overflow-x: hidden;
-        -webkit-font-smoothing: antialiased;
-      }
-      body.alt {
-        --bg: var(--bg-alt);
-        --card-bg: rgba(1, 204, 215, 0.5);
-        --accent: #0891b2;
-      } /* frosted cyan card on the cyan page */
-      body.alt .about-inner {
-        color: #07080d;
-      }
-      body.alt .about-eyebrow {
-        color: rgba(7, 8, 13, 0.72);
-      }
-      body.alt .about-sub {
-        color: #07080d;
-      }
-      body.alt .about-p {
-        color: rgba(7, 8, 13, 0.78);
-      }
-      body.alt .about-links .hint {
-        color: rgba(7, 8, 13, 0.6);
-      }
-      body.alt .inline-link:hover {
-        color: #07080d;
-        border-color: #07080d;
-      }
-      body.alt .foot {
-        color: rgba(7, 8, 13, 0.55);
-      }
-      #bg {
-        position: fixed;
-        inset: 0;
-        z-index: 0;
-        display: block;
-      }
-      .grain {
-        position: fixed;
-        inset: 0;
-        z-index: 1;
-        pointer-events: none;
-        opacity: 0.05;
-        background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)' opacity='0.7'/></svg>");
-      }
-      main {
-        position: relative;
-        z-index: 2;
-        min-height: 100vh;
-        min-height: 100svh;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        gap: clamp(0px, 2.5vh, 26px);
-        padding: 48px 24px 96px;
-        text-align: center;
-      }
-      .eyebrow {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        align-items: center;
-        gap: 12px;
-        max-width: min(90vw, 60ch);
-        text-align: center;
-        font-family: var(--font-display);
-        font-weight: 500;
-        font-size: clamp(0.8rem, 1.9vw, 0.98rem);
-        letter-spacing: 0.04em;
-        color: var(--muted);
-        opacity: 0;
-        animation: fadeUp 0.8s ease 0.1s forwards;
-      }
-      .eyebrow .dot {
-        width: 6px;
-        height: 6px;
-        border-radius: 50%;
-        background: var(--accent);
-        box-shadow: 0 0 12px 2px rgba(11, 163, 255, 0.55);
-        animation: pulse 2.6s ease-in-out infinite;
-      }
-      .domain {
-        display: flex;
-        user-select: none;
-        cursor: default;
-        font-weight: 800;
-        line-height: 1;
-        font-size: clamp(2.4rem, 12vw, 9rem);
-        letter-spacing: -0.02em;
-      }
-      .ltr {
-        display: inline-block;
-        opacity: 0;
-        animation:
-          rise 1s ease-out forwards,
-          wave 6s ease-in-out infinite;
-        animation-delay: calc(0.25s + var(--i) * 0.08s), calc(var(--i) * -0.8s);
-        transition:
-          transform 0.35s cubic-bezier(0.2, 0.75, 0.25, 1),
-          color 0.3s ease,
-          text-shadow 0.3s ease;
-      }
-      .ltr.settled:hover {
-        transform: translateY(-10px);
-        color: var(--accent);
-        text-shadow: 0 0 28px rgba(11, 163, 255, 0.45);
-      }
-      .tld .ltr {
-        color: var(--accent);
-      }
-      .tld .ltr.settled:hover {
-        color: var(--ink);
-        text-shadow: 0 0 28px rgba(244, 246, 250, 0.35);
-      }
-      .text-wrap {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        margin-top: clamp(
-          -12px,
-          -1.5vh,
-          -6px
-        ); /* negative margin: pull text up toward the wordmark */
-        opacity: 0;
-        animation: fadeUp 0.9s ease 1s forwards;
-      }
-      .text {
-        font-family: var(--font-text);
-        font-weight: 500;
-        font-size: clamp(1.15rem, 2.6vw, 1.65rem);
-        color: var(--muted);
-        max-width: 36ch;
-        line-height: 1.45;
-        text-wrap: pretty;
-        cursor: pointer;
-        overflow: hidden;
-        transition:
-          opacity 0.45s ease,
-          transform 0.45s ease,
-          height 0.45s ease,
-          color 0.3s ease;
-      }
-      .text:hover {
-        color: var(--ink);
-      }
-      .text.swap {
-        opacity: 0;
-        transform: translateY(12px);
-      }
-      .hint {
-        margin-top: 16px;
-        font-family: var(--font-mono);
-        font-size: 0.62rem;
-        letter-spacing: 0.22em;
-        text-transform: uppercase;
-        color: var(--faint);
-        text-decoration: none;
-        cursor: pointer;
-        transition:
-          color 0.3s ease,
-          letter-spacing 0.3s ease,
-          transform 0.3s ease;
-      }
-      .hint:visited {
-        color: var(--faint);
-      }
-      .hint:focus-visible {
-        outline: 1px solid var(--accent);
-        outline-offset: 3px;
-      }
-      .hint:hover {
-        color: var(--ink);
-        letter-spacing: 0.34em;
-        transform: translateY(-2px);
-      }
-      .foot {
-        position: relative;
-        z-index: 2;
-        text-align: center;
-        pointer-events: none;
-        padding: 0 24px 26px;
-        font-family: var(--font-mono);
-        font-size: 0.62rem;
-        letter-spacing: 0.22em;
-        text-transform: uppercase;
-        color: var(--faint);
-      }
-      /* ---------- moving scroll cue at the bottom of the hero ---------- */
-      .scroll-cue {
-        position: fixed;
-        left: 50%;
-        bottom: 20px;
-        transform: translateX(-50%);
-        z-index: 3;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 10px;
-        font-family: var(--font-mono);
-        font-size: 0.62rem;
-        letter-spacing: 0.3em;
-        text-transform: uppercase;
-        color: var(--faint);
-        text-decoration: none;
-        cursor: pointer;
-        transition:
-          opacity 0.45s ease,
-          color 0.3s ease;
-      }
-      .scroll-cue:hover {
-        color: var(--ink);
-      }
-      .scroll-cue:focus-visible {
-        outline: 1px solid var(--accent);
-        outline-offset: 3px;
-      }
-      .scroll-cue.hide {
-        opacity: 0;
-        pointer-events: none;
-      }
-      .cue-track {
-        position: relative;
-        width: 1px;
-        height: 44px;
-        background: rgba(244, 246, 250, 0.16);
-        overflow: hidden;
-      }
-      .cue-dot {
-        position: absolute;
-        left: -1.5px;
-        top: 0;
-        width: 4px;
-        height: 10px;
-        border-radius: 2px;
-        background: var(--accent);
-        box-shadow: 0 0 10px 1px rgba(11, 163, 255, 0.6);
-        animation: cueDrop 1.8s cubic-bezier(0.45, 0, 0.55, 1) infinite;
-      }
-      @keyframes cueDrop {
-        0% {
-          transform: translateY(-12px);
-          opacity: 0;
-        }
-        20% {
-          opacity: 1;
-        }
-        100% {
-          transform: translateY(46px);
-          opacity: 0;
-        }
-      }
-      /* ---------- about section ---------- */
-      #about {
-        position: relative;
-        z-index: 2;
-        display: flex;
-        justify-content: flex-start;
-        padding: 14vh 24px 6vh clamp(24px, 6vw, 96px);
-      }
-      .about-inner {
-        position: relative;
-        overflow: hidden;
-        width: min(90vw, 72ch);
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        gap: clamp(16px, 3vh, 28px);
-        text-align: left;
-        background: var(--card-bg);
-        border: none;
-        border-radius: 0;
-        padding: clamp(24px, 4vw, 44px);
-        box-shadow: 0 32px 32px -12px rgba(0, 0, 0, 0.45);
-        backdrop-filter: blur(16px) saturate(1.5);
-        -webkit-backdrop-filter: blur(16px) saturate(1.5);
-        transform: perspective(1000px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
-        transition: transform 0.18s ease-out;
-      } /* frosted glass + pointer tilt; shadow bottom-only, no border, rectangular */
-      /* cursor spotlight inside the card */
-      .about-inner::before {
-        content: '';
-        position: absolute;
-        inset: 0;
-        pointer-events: none;
-        background: radial-gradient(
-          260px circle at calc(var(--mx, 0.5) * 100%) calc(var(--my, 0.5) * 100%),
-          color-mix(in srgb, var(--accent) 20%, transparent),
-          transparent 70%
-        );
-        opacity: 1;
-      }
-      .about-inner .dot {
-        animation: pulse 2.6s ease-in-out infinite;
-      }
-      .about-eyebrow {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        font-family: var(--font-display);
-        font-weight: 500;
-        font-size: clamp(0.8rem, 1.9vw, 0.98rem);
-        letter-spacing: 0.04em;
-        color: var(--muted);
-      }
-      .about-title {
-        font-weight: 800;
-        line-height: 1.05;
-        letter-spacing: -0.02em;
-        font-size: clamp(2.2rem, 7.5vw, 5rem);
-      }
-      .about-title .accent {
-        color: var(--accent);
-      }
-      .about-sub {
-        font-weight: 500;
-        font-size: clamp(1.25rem, 3.2vw, 1.9rem);
-        letter-spacing: -0.01em;
-        color: var(--ink);
-      }
-      .about-p {
-        font-family: var(--font-text);
-        font-weight: 400;
-        font-size: clamp(1rem, 2vw, 1.2rem);
-        color: var(--muted);
-        max-width: 62ch;
-        line-height: 1.6;
-        text-wrap: pretty;
-      }
-      .about-links {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 12px 28px;
-      }
-      .about-links .hint {
-        margin-top: 0;
-      }
-      .inline-link {
-        color: var(--accent);
-        text-decoration: none;
-        border-bottom: 1px solid rgba(11, 163, 255, 0.4);
-        border-bottom-color: color-mix(in srgb, var(--accent) 40%, transparent);
-        transition:
-          color 0.3s ease,
-          border-color 0.3s ease;
-      }
-      .inline-link:hover {
-        color: var(--ink);
-        border-color: var(--ink);
-      }
-      /* ---------- reveal on scroll: big headers first, paragraphs after, sliding up from the bottom ---------- */
-      .reveal {
-        opacity: 0;
-        transform: translateY(44px);
-        transition:
-          opacity 0.8s ease var(--d, 0s),
-          transform 0.8s cubic-bezier(0.2, 0.75, 0.25, 1) var(--d, 0s);
-      }
-      .reveal.in {
-        opacity: 1;
-        transform: translateY(0);
-      }
-      @keyframes rise {
-        from {
-          opacity: 0;
-        }
-        to {
-          opacity: 1;
-        }
-      }
-      @keyframes fadeUp {
-        from {
-          opacity: 0;
-          transform: translateY(14px);
-        }
-        to {
-          opacity: 1;
-          transform: none;
-        }
-      }
-      @keyframes wave {
-        0%,
-        100% {
-          translate: 0 0;
-          rotate: 0deg;
-        }
-        50% {
-          translate: 0 -4px;
-          rotate: 1.5deg;
-        }
-      }
-      @keyframes pulse {
-        0%,
-        100% {
-          opacity: 1;
-        }
-        50% {
-          opacity: 0.35;
-        }
-      }
-      @media (prefers-reduced-motion: reduce) {
-        .domain,
-        .eyebrow,
-        .text-wrap,
-        .eyebrow .dot {
-          animation: none !important;
-          opacity: 1 !important;
-          transform: none !important;
-        }
-        .ltr {
-          animation: none !important;
-          opacity: 1 !important;
-          transform: none !important;
-        }
-        .text,
-        .hint {
-          transition: none;
-        }
-        .cue-dot {
-          animation: none !important;
-          transform: translateY(18px);
-          opacity: 0.9;
-        }
-        .reveal {
-          opacity: 1 !important;
-          transform: none !important;
-          transition: none !important;
-        }
-        .about-inner {
-          transition: none !important;
-        }
-        .about-inner .dot {
-          animation: none !important;
-        }
-        body,
-        #bg {
-          transition: none !important;
-        }
-      }
-    </style>
+    <script src="js/theme.js"></script>
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/about.css" />
+    <link rel="stylesheet" href="css/motion.css" />
   </head>
   <body>
     <canvas id="bg" aria-hidden="true"></canvas>
     <div class="grain" aria-hidden="true"></div>
+    <header class="topbar" aria-label="Top navigation">
+      <div class="brand" aria-label="ell0.uz brand">
+        <span class="brand-mark">ell</span><span class="brand-dot">0</span><span class="brand-domain">.uz</span>
+      </div>
+      <nav class="top-nav" aria-label="Main navigation">
+        <a href="#about">About</a>
+        <a href="#about-socials">Socials</a>
+        <a href="mailto:ell@ell0.uz">Contact</a>
+        <button
+          class="theme-toggle"
+          id="theme-toggle"
+          type="button"
+          aria-label="Switch to light mode"
+          aria-pressed="false"
+        >
+          Light
+        </button>
+      </nav>
+    </header>
     <main>
       <p class="eyebrow"><span class="dot"></span><span>personal domain</span></p>
       <h1 class="domain" aria-label="ell0.uz">
@@ -569,41 +112,11 @@
         <p class="text" id="text" role="button" tabindex="0" title="Click for another text">
           Why do programmers prefer dark mode? Because light attracts bugs.
         </p>
-        <a
-          class="hint"
-          href="https://discord.com/users/938080309730246677"
-          target="_blank"
-          rel="noopener"
-          >Discord</a
-        >
-        <a class="hint" href="https://t.me/ell0uz" target="_blank" rel="noopener"
-          >Telegram</a
-        >
-        <a class="hint" href="mailto:ell@ell0.uz">E-mail</a>
-      </div>
-    </main>
-    <a class="scroll-cue" href="#about" aria-label="Scroll down to the about section">
-      <span>scroll</span>
-      <span class="cue-track" aria-hidden="true"><span class="cue-dot"></span></span>
-    </a>
-    <section id="about" aria-label="About me">
-      <div class="about-inner">
-        <p class="about-eyebrow reveal" style="--d: 0s">
-          <span class="dot"></span><span>about me</span>
-        </p>
-        <h2 class="about-title reveal" style="--d: 0.08s">
-          hi, i'm <span class="accent ltr flicker" style="--i: 0">e</span
-          ><span class="accent ltr flicker" style="--i: 1">l</span
-          ><span class="accent ltr flicker" style="--i: 2">l</span>!
-        </h2>
-        <p class="about-p reveal" style="--d: 0.22s">
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quae eius voluptates doloribus excepturi quasi porro? Sunt possimus commodi voluptatibus maxime autem accusantium? Earum aperiam velit ex fugit molestias, eius natus!
-        </p>
-        <p class="about-p reveal" style="--d: 0.34s">
-          i exist and 🇺🇿
-        </p>
-        <h3 class="about-sub reveal" style="--d: 0.46s">Socials</h3>
-        <div class="about-links reveal" style="--d: 0.56s">
+        <div class="primary-actions" aria-label="Primary actions">
+          <a class="button button-primary" href="#about">About me</a>
+          <a class="button button-secondary" href="mailto:ell@ell0.uz">Say hello</a>
+        </div>
+        <div class="social-strip" id="hero-socials">
           <a
             class="hint"
             href="https://discord.com/users/938080309730246677"
@@ -617,344 +130,88 @@
           <a class="hint" href="mailto:ell@ell0.uz">E-mail</a>
         </div>
       </div>
+    </main>
+    <a class="scroll-cue" href="#about" aria-label="Scroll down to the about section">
+      <span>scroll</span>
+      <span class="cue-track" aria-hidden="true"><span class="cue-dot"></span></span>
+    </a>
+    <section id="about" aria-label="About me">
+      <div class="about-inner">
+        <span class="card-edge-glow" aria-hidden="true"></span>
+        <div class="about-copy">
+          <p class="about-eyebrow reveal" style="--d: 0s">
+            <span class="dot"></span><span>about me</span>
+          </p>
+          <h2 class="about-title reveal" style="--d: 0.08s">
+            hi, i'm <span class="accent ltr flicker" style="--i: 0">e</span
+            ><span class="accent ltr flicker" style="--i: 1">l</span
+            ><span class="accent ltr flicker" style="--i: 2">l</span>!
+          </h2>
+          <p class="about-p reveal" style="--d: 0.22s">
+            I build polished digital experiences with an eye for clarity, motion, and the small details that make interfaces feel alive. I enjoy turning ideas into refined products with strong visual rhythm and useful interactions.
+          </p>
+          <p class="about-p reveal" style="--d: 0.34s">
+            I spend my time exploring web design, developer tooling, and modern creative builds — with a little bit of that "what if we made it feel effortless" energy.
+          </p>
+        </div>
+        <div class="about-details">
+          <div class="github-activity reveal" style="--d: 0.46s">
+            <div class="github-activity-heading">
+              <span>GitHub activity</span>
+              <a href="https://github.com/ell0uz" target="_blank" rel="noopener">github.com/ell0uz ↗</a>
+            </div>
+            <div class="github-placeholder">
+              <span class="github-placeholder-mark" aria-hidden="true">SVG</span>
+              <p>
+                Placeholder for my Metrics GitHub Actions project. It will generate a richer GitHub
+                activity SVG here.
+              </p>
+            </div>
+          </div>
+          <div class="discord-presence reveal" id="discord-presence" data-state="loading" style="--d: 0.56s" aria-live="polite">
+            <div class="discord-avatar-frame">
+              <img id="discord-avatar" alt="" width="48" height="48" hidden />
+              <span class="discord-avatar-fallback" id="discord-avatar-fallback" aria-hidden="true">e</span>
+            </div>
+            <div class="discord-presence-copy">
+              <div class="discord-presence-heading">
+                <strong id="discord-name">ell0uz</strong>
+                <span class="discord-presence-status">
+                  <span class="discord-presence-dot" aria-hidden="true"></span>
+                  <span id="discord-status">Connecting</span>
+                </span>
+              </div>
+              <p class="discord-activity" id="discord-activity">Loading Discord presence…</p>
+            </div>
+            <a
+              class="discord-profile-link"
+              href="https://discord.com/users/938080309730246677"
+              target="_blank"
+              rel="noopener"
+              >Discord ↗</a
+            >
+          </div>
+          <div class="about-socials">
+            <h3 class="about-sub reveal" style="--d: 0.66s">Socials</h3>
+            <div class="about-links reveal" id="about-socials" style="--d: 0.76s">
+              <a
+                class="hint"
+                href="https://discord.com/users/938080309730246677"
+                target="_blank"
+                rel="noopener"
+                >Discord</a
+              >
+              <a class="hint" href="https://t.me/ell0uz" target="_blank" rel="noopener"
+                >Telegram</a
+              >
+              <a class="hint" href="mailto:ell@ell0.uz">E-mail</a>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
     <footer class="foot">© 2026 ell0.uz</footer>
-    <script>
-      (() => {
-        const RM = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-        /* ---------- animated starfield background ---------- */
-        const canvas = document.getElementById('bg');
-        const ctx = canvas.getContext('2d');
-        let W = 0,
-          H = 0,
-          stars = [],
-          meteors = [];
-        const mouse = { x: 0.5, y: 0.5 };
-        /* stars show everywhere — under the frosted card they get blurred by backdrop-filter */
-        const card = document.querySelector('.about-inner');
-
-        const targetCount = () => {
-          const base = Math.min(260, Math.round((W * H) / 8000));
-          return document.body.classList.contains('alt')
-            ? Math.min(420, Math.round(base * 1.7))
-            : base;
-        }; // scrolled page gets a denser sky
-        function makeStar() {
-          return {
-            x: Math.random() * W,
-            y: Math.random() * H,
-            r: 0.3 + Math.random() * 1.3,
-            phase: Math.random() * Math.PI * 2,
-            speed: 0.4 + Math.random() * 1.2,
-            vx: (Math.random() - 0.5) * 0.06,
-            vy: (Math.random() - 0.5) * 0.06,
-            depth: 0.3 + Math.random() * 0.7,
-            warm: Math.random() < 0.12,
-          };
-        }
-        function seed() {
-          stars = Array.from({ length: targetCount() }, makeStar);
-        }
-        /* Resize keeps the stars where they are: positions rescale proportionally into the
-     new viewport instead of reseeding. (iOS Safari fires resize when the URL bar hides,
-     which used to reshuffle the whole sky.) CSS size updates instantly; the bitmap
-     rescale is debounced so resize storms don't thrash. */
-        let resizeTimer = null;
-        function applyResize() {
-          const dpr = Math.min(window.devicePixelRatio || 1, 2);
-          const oldW = W,
-            oldH = H;
-          W = window.innerWidth;
-          H = window.innerHeight;
-          canvas.width = W * dpr;
-          canvas.height = H * dpr;
-          canvas.style.width = W + 'px';
-          canvas.style.height = H + 'px';
-          ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-          if (oldW > 0 && oldH > 0 && stars.length) {
-            const sx = W / oldW,
-              sy = H / oldH;
-            for (const s of stars) {
-              s.x = Math.min(Math.max(s.x * sx, -4), W + 4);
-              s.y = Math.min(Math.max(s.y * sy, -4), H + 4);
-            }
-            const n = targetCount();
-            while (stars.length < n) stars.push(makeStar());
-            if (stars.length > n) stars.length = n;
-          } else {
-            seed();
-          }
-          if (RM) draw(performance.now()); // reduced-motion renders a single frame per state change (e.g. after resize)
-        }
-        function resize() {
-          if (!W) {
-            applyResize();
-            return;
-          } // first paint: immediate
-          canvas.style.width = window.innerWidth + 'px'; // CSS size follows instantly…
-          canvas.style.height = window.innerHeight + 'px';
-          clearTimeout(resizeTimer); // …bitmap rescale is debounced
-          resizeTimer = setTimeout(applyResize, 150);
-        }
-        function spawnMeteor() {
-          const dir = Math.random() < 0.5 ? 1 : -1;
-          meteors.push({
-            x: W * (0.15 + Math.random() * 0.7),
-            y: Math.random() * H * 0.3,
-            vx: dir * (6 + Math.random() * 5),
-            vy: 3 + Math.random() * 2.5,
-            life: 1,
-          });
-        }
-        let meteorTimer = 2200;
-        function draw(t) {
-          ctx.clearRect(0, 0, W, H);
-          const px = mouse.x - 0.5,
-            py = mouse.y - 0.5;
-          const altSky = document.body.classList.contains('alt'); // inverted, denser, faster sky on the scrolled page
-          const aggro = altSky ? 2.5 : 1;
-          for (const s of stars) {
-            const dx = s.x + px * 26 * s.depth,
-              dy = s.y + py * 26 * s.depth;
-            const tw = altSky
-              ? 0.15 + 0.85 * Math.abs(Math.sin(t * 0.002 * s.speed + s.phase))
-              : 0.35 + 0.65 * Math.abs(Math.sin(t * 0.001 * s.speed + s.phase));
-            ctx.globalAlpha = tw;
-            ctx.fillStyle = altSky
-              ? s.warm
-                ? '#0891b2'
-                : '#07080d'
-              : s.warm
-                ? '#0BA3FF'
-                : '#f4f6fa';
-            ctx.beginPath();
-            ctx.arc(dx, dy, s.r, 0, Math.PI * 2);
-            ctx.fill();
-            if (!RM) {
-              s.x += s.vx * aggro;
-              s.y += s.vy * aggro;
-              if (s.x < -4) s.x = W + 4;
-              else if (s.x > W + 4) s.x = -4;
-              if (s.y < -4) s.y = H + 4;
-              else if (s.y > H + 4) s.y = -4;
-            }
-          }
-          if (!RM) {
-            meteorTimer -= 16;
-            if (meteorTimer <= 0) {
-              spawnMeteor();
-              meteorTimer = 3500 + Math.random() * 5500;
-            }
-          }
-          for (let i = meteors.length - 1; i >= 0; i--) {
-            const m = meteors[i];
-            m.x += m.vx;
-            m.y += m.vy;
-            m.life -= 0.012;
-            if (m.life <= 0 || m.y > H + 40) {
-              meteors.splice(i, 1);
-              continue;
-            }
-            const mc = altSky ? '8,145,178' : '11,163,255';
-            const g = ctx.createLinearGradient(m.x, m.y, m.x - m.vx * 12, m.y - m.vy * 12);
-            g.addColorStop(0, 'rgba(' + mc + ',' + (0.9 * m.life).toFixed(3) + ')');
-            g.addColorStop(1, 'rgba(' + mc + ',0)');
-            ctx.globalAlpha = 1;
-            ctx.strokeStyle = g;
-            ctx.lineWidth = 1.6;
-            ctx.beginPath();
-            ctx.moveTo(m.x, m.y);
-            ctx.lineTo(m.x - m.vx * 12, m.y - m.vy * 12);
-            ctx.stroke();
-          }
-          ctx.globalAlpha = 1;
-          if (!RM) requestAnimationFrame(draw);
-        }
-        window.addEventListener('resize', resize);
-        /* whole-page mouse tracking: the card tilts toward the cursor and the spotlight follows
-     it even when the pointer is outside the box — positions clamp to the card edges, so
-     there is no snap-to-center when the hover ends */
-        window.addEventListener('pointermove', (e) => {
-          mouse.x = e.clientX / Math.max(W, 1);
-          mouse.y = e.clientY / Math.max(H, 1);
-          if (card && !RM) {
-            const r = card.getBoundingClientRect();
-            const cx = Math.min(1, Math.max(0, (e.clientX - r.left) / Math.max(r.width, 1)));
-            const cy = Math.min(1, Math.max(0, (e.clientY - r.top) / Math.max(r.height, 1)));
-            card.style.setProperty('--mx', cx.toFixed(3));
-            card.style.setProperty('--my', cy.toFixed(3));
-            card.style.setProperty('--ry', ((cx - 0.5) * 6).toFixed(2) + 'deg');
-            card.style.setProperty('--rx', ((0.5 - cy) * 5).toFixed(2) + 'deg');
-          }
-        });
-        resize();
-        requestAnimationFrame(draw);
-
-        /* ---------- rotating texts, bottom of center ---------- */
-        const texts = [
-          /* Delay the texts thing */
-          '',
-          'lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod.',
-          'this is my domain dont ya know!!',
-          '🇺🇿',
-          'wip',
-          'Best Pastebin alternative: bin.ell0.uz',
-          'yea this thing better shut up',
-          '',
-          '',
-        ];
-        const textEl = document.getElementById('text');
-        let ji = 0,
-          timer = null;
-        function next() {
-          ji = (ji + 1) % texts.length;
-          const h0 = textEl.offsetHeight; // height of the current text
-          textEl.classList.add('swap'); // fade/slide out
-          setTimeout(() => {
-            textEl.textContent = texts[ji];
-            const h1 = textEl.offsetHeight; // natural height of the new text
-            textEl.classList.remove('swap'); // fade/slide in
-            if (RM) return;
-            // animate the height from old to new so line-count changes glide
-            textEl.style.height = h0 + 'px';
-            void textEl.offsetHeight; // force reflow
-            textEl.style.height = h1 + 'px';
-            setTimeout(() => {
-              textEl.style.height = '';
-            }, 500); // release to auto
-          }, 450);
-        }
-        function arm() {
-          clearInterval(timer);
-          if (!RM) timer = setInterval(next, 6000);
-        }
-        textEl.textContent = texts[0];
-        textEl.addEventListener('click', () => {
-          next();
-          arm();
-        });
-        textEl.addEventListener('keydown', (e) => {
-          if (e.key === 'Enter' || e.key === ' ') {
-            e.preventDefault();
-            next();
-            arm();
-          }
-        });
-        arm();
-
-        /* ---------- free the letters for hover after entrance ---------- */
-        document
-          .querySelectorAll('.ltr')
-          .forEach((el) =>
-            el.addEventListener('animationend', () => el.classList.add('settled'), { once: true }),
-          );
-
-        /* ---------- the "0" flickers like a broken lamp: randomized WAAPI bursts ----------
-     Each burst = random opacity keyframes + random duration + random easing per
-     segment, chained via onfinish, so no two flickers are ever the same. */
-        const lamp = document.getElementById('lamp');
-        const EASINGS = [
-          'ease-in-out',
-          'ease-out',
-          'ease-in',
-          'linear',
-          'cubic-bezier(.6,0,.9,.4)',
-          'steps(2,end)',
-          'steps(3,end)',
-        ];
-        const randEasing = () => EASINGS[Math.floor(Math.random() * EASINGS.length)];
-        function lampFlicker() {
-          if (RM) return;
-          if (Math.random() < 0.55) {
-            // steady stretch
-            setTimeout(lampFlicker, 200 + Math.random() * 1200);
-            return;
-          }
-          const n = 2 + Math.floor(Math.random() * 4); // burst length
-          const kf = [{ opacity: 1, easing: randEasing() }];
-          for (let k = 0; k < n; k++) {
-            kf.push({
-              opacity: +(
-                Math.random() < 0.5 ? 0.05 + Math.random() * 0.3 : 0.5 + Math.random() * 0.5
-              ).toFixed(2),
-            });
-          }
-          kf.push({ opacity: 1 });
-          const anim = lamp.animate(kf, {
-            duration: 120 + Math.random() * 450,
-            easing: 'ease-in-out',
-            fill: 'none',
-          });
-          anim.onfinish = () => lampFlicker();
-        }
-        setTimeout(lampFlicker, 1700); // start after the entrance fade
-
-        /* ---------- the two "l"s flicker as well — same randomized WAAPI bursts, but each letter
-     runs its own independent loop with a staggered start, so they never flicker in sync ---------- */
-        document.querySelectorAll('.ltr.flicker').forEach((el, idx) => {
-          function lFlicker() {
-            if (RM) return;
-            if (Math.random() < 0.55) {
-              // steady stretch
-              setTimeout(lFlicker, 200 + Math.random() * 1200);
-              return;
-            }
-            const n = 2 + Math.floor(Math.random() * 4); // burst length
-            const kf = [{ opacity: 1, easing: randEasing() }];
-            for (let k = 0; k < n; k++) {
-              kf.push({
-                opacity: +(
-                  Math.random() < 0.5 ? 0.05 + Math.random() * 0.3 : 0.5 + Math.random() * 0.5
-                ).toFixed(2),
-              });
-            }
-            kf.push({ opacity: 1 });
-            const anim = el.animate(kf, {
-              duration: 120 + Math.random() * 450,
-              easing: 'ease-in-out',
-              fill: 'none',
-            });
-            anim.onfinish = () => lFlicker();
-          }
-          setTimeout(lFlicker, 1700 + idx * 700 + Math.random() * 900);
-        });
-
-        /* ---------- scroll cue: hide once the hero is scrolled past ---------- */
-        const cue = document.querySelector('.scroll-cue');
-        const about = document.getElementById('about');
-        const onScroll = () => {
-          cue.classList.toggle('hide', window.scrollY > window.innerHeight * 0.35);
-          // second page inverts: solid cyan bg, frosted card, dark text, denser dark stars (allowed under the glass)
-          const alt = about.offsetTop < window.scrollY + window.innerHeight * 0.55;
-          document.body.classList.toggle('alt', alt);
-          if (alt) {
-            const n = targetCount();
-            while (stars.length < n) stars.push(makeStar());
-          } // sky thickens the moment we scroll down
-        };
-        window.addEventListener('scroll', onScroll, { passive: true });
-        onScroll();
-
-        /* ---------- about: reveal from the bottom on scroll, headers first, then paragraphs ---------- */
-        const revealEls = document.querySelectorAll('.reveal');
-        if (RM) {
-          revealEls.forEach((el) => el.classList.add('in'));
-        } else {
-          const io = new IntersectionObserver(
-            (entries) => {
-              for (const e of entries) {
-                if (e.isIntersecting) {
-                  e.target.classList.add('in');
-                  io.unobserve(e.target);
-                }
-              }
-            },
-            { threshold: 0.15 },
-          );
-          revealEls.forEach((el) => io.observe(el));
-        }
-      })();
-    </script>
+    <script src="js/site.js" defer></script>
+    <script src="js/lanyard.js" defer></script>
   </body>
 </html>
