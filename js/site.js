@@ -294,7 +294,7 @@
     'this is my domain dont ya know!!',
     '🇺🇿',
     'wip',
-    'Best Pastebin alternative: bin.ell0.uz',
+    'Bess site',
     'yea this thing better shut up',
     '',
     '',
