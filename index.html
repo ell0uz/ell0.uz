@@ -31,6 +31,14 @@
   "inLanguage": "en"
 }
 </script>
+<!-- self-hosted fonts used above the fold: preload so they start with the HTML parse.
+     crossorigin is required — fonts are always fetched in CORS mode, and without it the
+     preload never matches the @font-face request and each file downloads twice.
+     SpaceGrotesk-Regular (400) is only used below the fold, so it loads on demand. -->
+<link rel="preload" href="./Unbounded-ExtraBold.ttf" as="font" type="font/ttf" crossorigin>
+<link rel="preload" href="./Unbounded-Medium.ttf" as="font" type="font/ttf" crossorigin>
+<link rel="preload" href="./SpaceGrotesk-Medium.ttf" as="font" type="font/ttf" crossorigin>
+<link rel="preload" href="./JetBrainsMono-Regular.ttf" as="font" type="font/ttf" crossorigin>
 <style>
   /* self-hosted fonts — font-display:swap keeps text visible while they load */
   @font-face{font-family:'Unbounded';src:url('./Unbounded-Medium.ttf') format('truetype');font-weight:500;font-style:normal;font-display:swap}
