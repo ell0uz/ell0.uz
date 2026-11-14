@@ -4,12 +4,14 @@ The source for [ell0.uz](https://ell0.uz), a personal site and portfolio.
 
 ## About
 
-This is a small, dependency-free static website. `index.html` contains the page structure, styles are
-split into focused files in `css/`, and interactive behavior lives in `js/`. Fonts, the favicon, and
-the social preview image are stored alongside the page.
+This is a small static website with no build step. `index.html` contains the page structure, styles
+are split into focused files in `css/`, and interactive behavior lives in `js/`. UI icons use
+Material Symbols Rounded from Google Fonts. The site's text fonts, favicon, and social preview image
+are stored alongside the page.
 
-The header theme switch remembers the selected dark or light theme. The aqua scroll palette is used
-only in light mode, and the scrollbar is styled to match the active palette.
+The header theme switch remembers the selected dark or light theme. The site uses Material
+3-inspired tonal surfaces, with its aqua scroll palette active only in light mode. The scrollbar and
+animated starfield follow the current theme.
 
 ## Preview
 

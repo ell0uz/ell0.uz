@@ -63,7 +63,11 @@
     transform: none !important;
   }
   .text,
-  .hint {
+  .brand,
+  .hint,
+  .top-nav a,
+  .theme-toggle,
+  .button {
     transition: none;
   }
   .cue-dot {

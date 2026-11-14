@@ -13,25 +13,33 @@
   let skyProgress = 0;
   let lastSkyFrameTime = 0;
   const themeToggle = document.getElementById('theme-toggle');
+  const themeIcon = document.getElementById('theme-icon');
+  const themeLabel = document.getElementById('theme-label');
   const themeColorMeta = document.querySelector('meta[name="theme-color"]');
+  let accentRgb = getComputedStyle(document.documentElement)
+    .getPropertyValue('--accent-rgb')
+    .trim();
   function updateThemeControl() {
     const lightTheme = document.documentElement.dataset.theme === 'light';
-    themeToggle.textContent = lightTheme ? 'Dark' : 'Light';
+    themeLabel.textContent = lightTheme ? 'Dark' : 'Light';
+    themeIcon.textContent = lightTheme ? 'dark_mode' : 'light_mode';
     themeToggle.setAttribute('aria-label', 'Switch to ' + (lightTheme ? 'dark' : 'light') + ' mode');
     themeToggle.setAttribute('aria-pressed', String(lightTheme));
   }
   function updateThemeColor() {
     if (!themeColorMeta) return;
-    const lightTheme = document.documentElement.dataset.theme === 'light';
-    themeColorMeta.content = lightTheme
-      ? document.body.classList.contains('scrolled')
-        ? '#01ccd7'
-        : '#f2f7fa'
-      : '#07080d';
+    themeColorMeta.content =
+      getComputedStyle(document.body).getPropertyValue('--md-sys-color-background').trim();
+  }
+  function updateAccentColor() {
+    accentRgb = getComputedStyle(document.documentElement)
+      .getPropertyValue('--accent-rgb')
+      .trim();
   }
   function setTheme(theme) {
     document.documentElement.dataset.theme = theme;
     updateThemeControl();
+    updateAccentColor();
     updateThemeColor();
     try {
       window.localStorage.setItem('site-theme', theme);
@@ -41,6 +49,7 @@
     if (RM) draw(performance.now());
   }
   updateThemeControl();
+  updateAccentColor();
   updateThemeColor();
   themeToggle.addEventListener('click', () => {
     setTheme(document.documentElement.dataset.theme === 'light' ? 'dark' : 'light');
@@ -162,7 +171,7 @@
         linkBuckets[bucket].push(start, end);
       }
     }
-    ctx.strokeStyle = lightTheme ? '#087c9c' : '#0ba3ff';
+    ctx.strokeStyle = 'rgb(' + accentRgb + ')';
     ctx.lineWidth = 0.75;
     ctx.lineCap = 'round';
     for (let bucket = 0; bucket < linkBuckets.length; bucket++) {
@@ -186,10 +195,10 @@
       ctx.globalAlpha = tw * point.opacity;
       ctx.fillStyle = lightTheme
         ? s.warm
-          ? '#087c9c'
+          ? 'rgb(' + accentRgb + ')'
           : '#193745'
         : s.warm
-          ? '#0BA3FF'
+          ? 'rgb(' + accentRgb + ')'
           : '#f4f6fa';
       ctx.beginPath();
       const scrolledRadius = Math.max(s.r * 1.35, 0.65);
@@ -226,7 +235,7 @@
         meteors.splice(i, 1);
         continue;
       }
-      const mc = '11,163,255';
+      const mc = accentRgb;
       const g = ctx.createLinearGradient(m.x, m.y, m.x - m.vx * 12, m.y - m.vy * 12);
       g.addColorStop(0, 'rgba(' + mc + ',' + (0.9 * m.life).toFixed(3) + ')');
       g.addColorStop(1, 'rgba(' + mc + ',0)');
@@ -414,6 +423,7 @@
     // Light mode brings back the aqua scroll palette; the starfield also fades into its scrolled state.
     const scrolled = about.offsetTop < window.scrollY + window.innerHeight * 0.55;
     document.body.classList.toggle('scrolled', scrolled);
+    document.documentElement.dataset.scrolled = String(scrolled);
     updateThemeColor();
     if (scrolled) {
       const n = targetCount();

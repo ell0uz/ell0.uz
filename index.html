@@ -9,10 +9,16 @@
     />
     <meta name="author" content="ell" />
     <meta name="robots" content="index, follow" />
-    <meta name="theme-color" content="#07080d" />
+    <meta name="theme-color" content="#101416" />
     <title>ell — Personal Portfolio &amp; Web Design | ell0.uz</title>
     <link rel="canonical" href="https://ell0.uz/" />
     <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,400,0,0&amp;display=block"
+      rel="stylesheet"
+    />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="ell0.uz" />
     <meta property="og:locale" content="en_US" />
@@ -78,13 +84,21 @@
     <canvas id="bg" aria-hidden="true"></canvas>
     <div class="grain" aria-hidden="true"></div>
     <header class="topbar" aria-label="Top navigation">
-      <div class="brand" aria-label="ell0.uz brand">
+      <a class="brand" href="#home" aria-label="ell0.uz home">
         <span class="brand-mark">ell</span><span class="brand-dot">0</span><span class="brand-domain">.uz</span>
-      </div>
+      </a>
       <nav class="top-nav" aria-label="Main navigation">
-        <a href="#about">About</a>
-        <a href="#about-socials">Socials</a>
-        <a href="mailto:ell@ell0.uz">Contact</a>
+        <a href="#about" aria-label="About"
+          ><span class="material-symbols-rounded" aria-hidden="true">person</span><span>About</span></a
+        >
+        <a href="#about-socials" aria-label="Socials"
+          ><span class="material-symbols-rounded" aria-hidden="true">groups</span
+          ><span>Socials</span></a
+        >
+        <a href="mailto:ell@ell0.uz" aria-label="Contact"
+          ><span class="material-symbols-rounded" aria-hidden="true">mail</span
+          ><span>Contact</span></a
+        >
         <button
           class="theme-toggle"
           id="theme-toggle"
@@ -92,11 +106,12 @@
           aria-label="Switch to light mode"
           aria-pressed="false"
         >
-          Light
+          <span class="material-symbols-rounded" id="theme-icon" aria-hidden="true">light_mode</span>
+          <span id="theme-label">Light</span>
         </button>
       </nav>
     </header>
-    <main>
+    <main id="home">
       <p class="eyebrow"><span class="dot"></span><span>personal domain</span></p>
       <h1 class="domain" aria-label="ell0.uz">
         <span class="ltr flicker" style="--i: 0">e</span
@@ -113,8 +128,14 @@
           Why do programmers prefer dark mode? Because light attracts bugs.
         </p>
         <div class="primary-actions" aria-label="Primary actions">
-          <a class="button button-primary" href="#about">About me</a>
-          <a class="button button-secondary" href="mailto:ell@ell0.uz">Say hello</a>
+          <a class="button button-primary" href="#about"
+            ><span class="material-symbols-rounded" aria-hidden="true">person</span
+            ><span>About me</span></a
+          >
+          <a class="button button-secondary" href="mailto:ell@ell0.uz"
+            ><span class="material-symbols-rounded" aria-hidden="true">mail</span
+            ><span>Say hello</span></a
+          >
         </div>
         <div class="social-strip" id="hero-socials">
           <a
@@ -122,12 +143,17 @@
             href="https://discord.com/users/938080309730246677"
             target="_blank"
             rel="noopener"
-            >Discord</a
+            ><span class="material-symbols-rounded" aria-hidden="true">forum</span
+            ><span>Discord</span></a
           >
           <a class="hint" href="https://t.me/ell0uz" target="_blank" rel="noopener"
-            >Telegram</a
+            ><span class="material-symbols-rounded" aria-hidden="true">send</span
+            ><span>Telegram</span></a
           >
-          <a class="hint" href="mailto:ell@ell0.uz">E-mail</a>
+          <a class="hint" href="mailto:ell@ell0.uz"
+            ><span class="material-symbols-rounded" aria-hidden="true">mail</span
+            ><span>E-mail</span></a
+          >
         </div>
       </div>
     </main>
@@ -158,8 +184,14 @@
           <div class="github-activity reveal" style="--d: 0.46s">
             <div class="github-activity-heading">
               <span>GitHub activity</span>
-              <a href="https://github.com/ell0uz" target="_blank" rel="noopener">github.com/ell0uz ↗</a>
+              <a href="https://github.com/ell0uz" target="_blank" rel="noopener"
+                ><span>github.com/ell0uz</span
+                ><span class="material-symbols-rounded" aria-hidden="true">open_in_new</span></a
+              >
             </div>
+            <!-- To use your generated Metrics graphic, save it next to this page (or update the path),
+                 then replace this placeholder block with:
+                 <img src="./metrics.svg" alt="GitHub activity metrics for ell0uz" /> -->
             <div class="github-placeholder">
               <span class="github-placeholder-mark" aria-hidden="true">SVG</span>
               <p>
@@ -188,7 +220,9 @@
               href="https://discord.com/users/938080309730246677"
               target="_blank"
               rel="noopener"
-              >Discord ↗</a
+              ><span class="material-symbols-rounded" aria-hidden="true">forum</span
+              ><span>Discord</span
+              ><span class="material-symbols-rounded" aria-hidden="true">open_in_new</span></a
             >
           </div>
           <div class="about-socials">
@@ -199,12 +233,17 @@
                 href="https://discord.com/users/938080309730246677"
                 target="_blank"
                 rel="noopener"
-                >Discord</a
+                ><span class="material-symbols-rounded" aria-hidden="true">forum</span
+                ><span>Discord</span></a
               >
               <a class="hint" href="https://t.me/ell0uz" target="_blank" rel="noopener"
-                >Telegram</a
+                ><span class="material-symbols-rounded" aria-hidden="true">send</span
+                ><span>Telegram</span></a
               >
-              <a class="hint" href="mailto:ell@ell0.uz">E-mail</a>
+              <a class="hint" href="mailto:ell@ell0.uz"
+                ><span class="material-symbols-rounded" aria-hidden="true">mail</span
+                ><span>E-mail</span></a
+              >
             </div>
           </div>
         </div>

@@ -18,13 +18,11 @@
   gap: clamp(14px, 2vh, 20px);
   background: var(--card-bg);
   border: 1px solid var(--card-edge);
-  border-radius: 28px;
+  border-radius: var(--shape-xl);
   padding: clamp(24px, 3.5vw, 36px);
-  box-shadow:
-    0 28px 80px -36px rgba(0, 0, 0, 0.65),
-    inset 0 1px 0 rgba(255, 255, 255, 0.12);
-  -webkit-backdrop-filter: blur(3px) saturate(1.35);
-  backdrop-filter: blur(3px) saturate(1.35);
+  box-shadow: var(--elevation-2), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+  -webkit-backdrop-filter: blur(10px) saturate(1.25);
+  backdrop-filter: blur(10px) saturate(1.25);
   transition:
     transform 0.16s ease-out,
     box-shadow 0.3s ease,
@@ -32,9 +30,7 @@
   transform: perspective(1200px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
 }
 :root[data-theme='light'] .about-inner {
-  box-shadow:
-    0 28px 80px -36px rgba(0, 0, 0, 0.28),
-    inset 0 1px 0 rgba(255, 255, 255, 0.72);
+  box-shadow: var(--elevation-2), inset 0 1px 0 rgba(255, 255, 255, 0.72);
 }
 .about-copy,
 .about-details {
@@ -121,7 +117,7 @@
       from 20deg,
       transparent 0deg 55deg,
       color-mix(in srgb, var(--accent) 58%, transparent) 78deg,
-      #b7f4ff 96deg,
+      var(--md-sys-color-primary) 96deg,
       color-mix(in srgb, var(--accent) 64%, transparent) 118deg,
       transparent 150deg 360deg
     );
@@ -174,6 +170,7 @@
   color: var(--muted);
 }
 .about-title {
+  font-family: var(--font-display);
   font-weight: 800;
   line-height: 1.05;
   letter-spacing: -0.02em;
@@ -183,10 +180,17 @@
   color: var(--accent);
 }
 .about-sub {
+  font-family: var(--font-display);
   font-weight: 500;
   font-size: clamp(1.25rem, 3.2vw, 1.9rem);
   letter-spacing: -0.01em;
   color: var(--ink);
+}
+.about-socials {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
 }
 .about-p {
   font-family: var(--font-text);
@@ -207,27 +211,21 @@
 }
 .about-links .hint {
   margin-top: 0;
-  padding: 0 14px;
-  min-height: 38px;
-  border-radius: 999px;
-  border-color: rgba(244, 246, 250, 0.12);
-}
-:root[data-theme='light'] .about-links .hint {
-  border-color: rgba(7, 8, 13, 0.18);
-  background: rgba(255, 255, 255, 0.2);
+  padding: 0 16px;
+  min-height: 40px;
 }
 .github-activity {
   width: 100%;
   display: grid;
   gap: 12px;
-  padding: 16px;
-  border: 1px solid rgba(7, 8, 13, 0.12);
-  border-radius: 18px;
-  background: rgba(7, 8, 13, 0.035);
-}
-:root[data-theme='light'] .github-activity {
-  border-color: rgba(7, 8, 13, 0.16);
-  background: rgba(255, 255, 255, 0.22);
+  padding: 18px;
+  border: 1px solid var(--md-sys-color-outline-variant);
+  border-radius: 24px;
+  background: color-mix(
+    in srgb,
+    var(--md-sys-color-surface-container-low) 86%,
+    transparent
+  );
 }
 .github-activity-heading {
   display: flex;
@@ -236,7 +234,7 @@
   align-items: center;
   gap: 8px 16px;
 }
-.github-activity-heading span {
+.github-activity-heading > span {
   font-family: var(--font-mono);
   font-size: 0.6rem;
   letter-spacing: 0.14em;
@@ -244,9 +242,13 @@
   color: var(--faint);
 }
 .github-activity-heading a {
-  color: var(--accent);
-  font-family: var(--font-mono);
-  font-size: 0.66rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--md-sys-color-primary);
+  font-family: var(--font-text);
+  font-size: 0.78rem;
+  font-weight: 500;
   text-decoration: none;
 }
 .github-activity-heading a:hover {
@@ -254,8 +256,9 @@
   text-underline-offset: 3px;
 }
 .github-activity-heading a:focus-visible {
-  outline: 1px solid var(--accent);
+  outline: 2px solid var(--md-sys-color-primary);
   outline-offset: 3px;
+  border-radius: var(--shape-xs);
 }
 .github-activity img {
   display: block;
@@ -268,12 +271,9 @@
   gap: 14px;
   min-height: 92px;
   padding: 16px;
-  border: 1px dashed rgba(7, 8, 13, 0.26);
-  border-radius: 12px;
-  background:
-    linear-gradient(rgba(7, 8, 13, 0.025) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(7, 8, 13, 0.025) 1px, transparent 1px);
-  background-size: 16px 16px;
+  border: 1px dashed var(--md-sys-color-outline);
+  border-radius: var(--shape-lg);
+  background: var(--md-sys-color-surface-container);
 }
 .github-placeholder-mark {
   flex: 0 0 auto;
@@ -281,11 +281,11 @@
   place-items: center;
   width: 44px;
   height: 44px;
-  border-radius: 12px;
-  background: rgba(8, 145, 178, 0.12);
-  color: var(--accent);
-  font-family: var(--font-mono);
-  font-size: 0.62rem;
+  border-radius: var(--shape-md);
+  background: var(--md-sys-color-primary-container);
+  color: var(--md-sys-color-on-primary-container);
+  font-family: var(--font-text);
+  font-size: 0.72rem;
   font-weight: 700;
   letter-spacing: 0.08em;
 }
@@ -302,13 +302,9 @@
   align-items: center;
   gap: 14px;
   padding: 14px 16px;
-  border: 1px solid rgba(244, 246, 250, 0.14);
-  border-radius: 18px;
-  background: rgba(7, 8, 13, 0.2);
-}
-:root[data-theme='light'] .discord-presence {
-  border-color: rgba(7, 8, 13, 0.16);
-  background: rgba(255, 255, 255, 0.3);
+  border: 1px solid var(--md-sys-color-outline-variant);
+  border-radius: 22px;
+  background: var(--md-sys-color-surface-container-low);
 }
 .discord-avatar-frame {
   position: relative;
@@ -349,10 +345,10 @@
   display: inline-flex;
   align-items: center;
   gap: 7px;
-  color: var(--faint);
-  font-family: var(--font-mono);
-  font-size: 0.56rem;
-  letter-spacing: 0.1em;
+  color: var(--md-sys-color-on-surface-variant);
+  font-family: var(--font-text);
+  font-size: 0.68rem;
+  letter-spacing: 0.02em;
   text-transform: uppercase;
 }
 .discord-presence-dot {
@@ -378,17 +374,21 @@
 .discord-activity {
   overflow: hidden;
   margin-top: 5px;
-  color: var(--muted);
+  color: var(--md-sys-color-on-surface-variant);
   font-family: var(--font-text);
   font-size: 0.82rem;
   line-height: 1.35;
   text-overflow: ellipsis;
 }
 .discord-profile-link {
-  color: var(--accent);
-  font-family: var(--font-mono);
-  font-size: 0.56rem;
-  letter-spacing: 0.1em;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: var(--md-sys-color-primary);
+  font-family: var(--font-text);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
   text-decoration: none;
   text-transform: uppercase;
   white-space: nowrap;
@@ -398,14 +398,14 @@
   text-underline-offset: 3px;
 }
 .discord-profile-link:focus-visible {
-  outline: 1px solid var(--accent);
+  outline: 2px solid var(--md-sys-color-primary);
   outline-offset: 3px;
+  border-radius: var(--shape-xs);
 }
 .inline-link {
   color: var(--accent);
   text-decoration: none;
-  border-bottom: 1px solid rgba(11, 163, 255, 0.4);
-  border-bottom-color: color-mix(in srgb, var(--accent) 40%, transparent);
+  border-bottom: 1px solid color-mix(in srgb, var(--accent) 40%, transparent);
   transition:
     color 0.3s ease,
     border-color 0.3s ease;
@@ -416,11 +416,11 @@
 }
 @media (max-width: 640px) {
   #about {
-    padding: 96px 18px 56px;
+    padding: 96px 18px calc(92px + env(safe-area-inset-bottom));
   }
   .about-inner {
     width: 100%;
-    border-radius: 22px;
+    border-radius: var(--shape-xl);
   }
   .discord-presence {
     grid-template-columns: auto minmax(0, 1fr);
