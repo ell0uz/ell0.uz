@@ -183,8 +183,8 @@
       <span>scroll</span>
       <span class="cue-track" aria-hidden="true"><span class="cue-dot"></span></span>
     </a>
-    <section id="about" aria-label="About me">
-      <div class="about-inner">
+    <section id="about" class="content-section content-section--bottom" aria-label="About me">
+      <div class="about-inner content-card">
         <span class="card-edge-glow" aria-hidden="true"></span>
         <div class="about-copy">
           <p class="about-eyebrow reveal" style="--d: 0s">
@@ -266,6 +266,30 @@
         </div>
       </div>
     </section>
+    <template id="content-section-template">
+      <section
+        id="new-section"
+        class="content-section content-section--right"
+        aria-labelledby="new-section-title"
+      >
+        <article class="content-card content-card--wide" style="--content-card-accent: #a78bfa">
+          <span class="card-edge-glow" aria-hidden="true"></span>
+          <p class="content-eyebrow reveal"><span class="dot"></span><span>section label</span></p>
+          <h2 class="content-title reveal" id="new-section-title">Section title</h2>
+          <p class="content-copy reveal">Add a short introduction for this section.</p>
+          <div class="content-grid">
+            <article class="content-tile reveal">
+              <h3>Item title</h3>
+              <p>Describe a project, interest, or another piece of content.</p>
+            </article>
+            <article class="content-tile reveal">
+              <h3>Another item</h3>
+              <p>Duplicate or remove these tiles to fit the section.</p>
+            </article>
+          </div>
+        </article>
+      </section>
+    </template>
     <footer class="foot">© 2026 ell0.uz</footer>
     <script src="js/site.js" defer></script>
     <script src="js/lanyard.js" defer></script>

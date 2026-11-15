@@ -9,7 +9,7 @@
     stars = [],
     meteors = [];
   const mouse = { x: 0.5, y: 0.5 };
-  const card = document.querySelector('.about-inner');
+  const cards = [...document.querySelectorAll('.content-card')];
   let skyProgress = 0;
   let lastSkyFrameTime = 0;
   const themeToggle = document.getElementById('theme-toggle');
@@ -254,6 +254,7 @@
   window.addEventListener('pointermove', (e) => {
     mouse.x = e.clientX / Math.max(W, 1);
     mouse.y = e.clientY / Math.max(H, 1);
+    const card = e.target instanceof Element ? e.target.closest('.content-card') : null;
     if (!card || RM || e.pointerType === 'touch') return;
     const rect = card.getBoundingClientRect();
     const x = Math.min(1, Math.max(0, (e.clientX - rect.left) / Math.max(rect.width, 1)));
@@ -263,11 +264,13 @@
     card.style.setProperty('--rx', ((0.5 - y) * 2.4).toFixed(2) + 'deg');
     card.style.setProperty('--ry', ((x - 0.5) * 3).toFixed(2) + 'deg');
   });
-  if (card) {
+  cards.forEach((card) => {
     card.addEventListener('pointerenter', () => card.classList.add('spotlight-active'));
-    card.addEventListener('pointerleave', () =>
-      card.classList.remove('spotlight-active'),
-    );
+    card.addEventListener('pointerleave', () => {
+      card.classList.remove('spotlight-active');
+      card.style.setProperty('--rx', '0deg');
+      card.style.setProperty('--ry', '0deg');
+    });
     card.addEventListener('pointerdown', (e) => {
       if (RM || (e.pointerType === 'mouse' && e.button !== 0)) return;
       const rect = card.getBoundingClientRect();
@@ -282,7 +285,7 @@
     card.addEventListener('animationend', (e) => {
       if (e.animationName === 'screenPress') card.classList.remove('pressing');
     });
-  }
+  });
   resize();
   requestAnimationFrame(draw);
 

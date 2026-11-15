@@ -648,7 +648,7 @@ main {
   .cue-track {
     height: 30px;
   }
-  #about {
+  .content-section {
     padding-bottom: calc(92px + env(safe-area-inset-bottom));
   }
   .foot {
@@ -745,14 +745,14 @@ main {
   .about-inner .dot {
     animation: none !important;
   }
-  .about-inner {
+  .content-card {
     transition: none !important;
     transform: none !important;
   }
-  .about-inner::before {
+  .content-card::before {
     display: none;
   }
-  .about-inner.pressing::after {
+  .content-card.pressing::after {
     animation: none !important;
   }
   body,
