@@ -25,12 +25,14 @@ Choose a section layout with one of these classes:
 - `content-section--right`: align the card to the right.
 - `content-section--center`: center the card in the viewport.
 - `content-section--bottom`: align the card to the bottom (used by About).
+- `content-section--bottom-right`: align the card to the bottom-right.
 - `content-section--fullscreen`: fill the available viewport area with the card.
 
 Cards default to the left. Add `content-card--narrow` or `content-card--wide` to change the width,
 and `content-card--centered` to center the card's contents. Set per-card colors using CSS custom
 properties, for example `style="--content-card-accent: #a78bfa; --content-card-surface: #20272a"`.
-Project or other repeatable items can use `.content-grid` and `.content-tile`.
+Use `<span class="accent">...</span>` in a `.content-title` to highlight part of the heading in that
+accent. Project or other repeatable items can use `.content-grid` and `.content-tile`.
 
 ## Preview
 
