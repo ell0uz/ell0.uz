@@ -161,7 +161,7 @@ html::-webkit-scrollbar-track {
 html::-webkit-scrollbar-thumb {
   background: var(--scrollbar-thumb);
   border: 2px solid var(--scrollbar-track);
-  border-radius: 999px;
+  border-radius: 0;
 }
 html::-webkit-scrollbar-thumb:hover {
   background: var(--scrollbar-thumb-hover);
@@ -281,7 +281,7 @@ main {
   padding: 10px 16px;
   background: color-mix(in srgb, var(--md-sys-color-surface-container) 88%, transparent);
   border: 1px solid var(--md-sys-color-outline-variant);
-  border-radius: var(--shape-xl);
+  border-radius: 0;
   backdrop-filter: blur(20px);
   box-shadow: var(--elevation-2);
 }
@@ -301,7 +301,7 @@ main {
   text-decoration: none;
   white-space: nowrap;
   padding: 4px 8px;
-  border-radius: var(--shape-full);
+  border-radius: 0;
   transition:
     background-color 0.3s ease,
     color 0.3s ease;
@@ -360,7 +360,7 @@ main {
   display: inline-flex;
   align-items: center;
   gap: 0.45em;
-  border-radius: var(--shape-full);
+  border-radius: 0;
   color: var(--md-sys-color-on-surface-variant);
   font-size: 0.78rem;
   padding: 8px 12px;
@@ -385,7 +385,7 @@ main {
   align-items: center;
   gap: 0.35em;
   border: 0;
-  border-radius: var(--shape-full);
+  border-radius: 0;
   padding: 8px 12px;
   background: var(--md-sys-color-surface-container-high);
   color: var(--md-sys-color-on-surface-variant);
@@ -449,7 +449,7 @@ main {
   gap: 0.55em;
   min-height: 48px;
   padding: 0 22px;
-  border-radius: var(--shape-lg);
+  border-radius: 0;
   font-size: 0.9rem;
   font-weight: 500;
   border: 1px solid transparent;
@@ -504,7 +504,7 @@ main {
   min-height: 40px;
   padding: 0 16px;
   font-size: 0.78rem;
-  border-radius: var(--shape-full);
+  border-radius: 0;
   border: 1px solid var(--md-sys-color-outline);
   background: transparent;
   color: var(--md-sys-color-on-surface-variant);
@@ -514,12 +514,14 @@ main {
     color 0.3s ease,
     transform 0.3s ease,
     border-color 0.3s ease,
-    background-color 0.3s ease;
+    background-color 0.3s ease,
+    box-shadow 0.3s ease;
 }
 .hint:visited {
   color: var(--md-sys-color-on-surface-variant);
 }
-.hint:hover {
+.hint:hover,
+.hint:focus-visible {
   color: var(--md-sys-color-on-surface);
   border-color: var(--md-sys-color-primary);
   background-color: color-mix(
@@ -527,6 +529,17 @@ main {
     var(--md-sys-color-primary) 10%,
     var(--md-sys-color-surface-container)
   );
+  transform: translateY(-2px);
+  box-shadow:
+    0 3px 0 color-mix(in srgb, var(--md-sys-color-primary) 46%, var(--md-sys-color-outline)),
+    0 9px 16px rgba(0, 0, 0, 0.24),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+.hint:active {
+  transform: translateY(1px);
+  box-shadow:
+    inset 0 2px 4px rgba(0, 0, 0, 0.2),
+    0 1px 0 color-mix(in srgb, var(--md-sys-color-primary) 46%, var(--md-sys-color-outline));
 }
 .foot {
   position: relative;
@@ -586,7 +599,7 @@ main {
   top: 0;
   width: 4px;
   height: 10px;
-  border-radius: 2px;
+  border-radius: var(--shape-full);
   background: var(--accent);
   box-shadow: 0 0 10px 1px rgba(var(--accent-rgb), 0.6);
   animation: cueDrop 1.8s cubic-bezier(0.45, 0, 0.55, 1) infinite;
@@ -611,7 +624,7 @@ main {
     width: min(calc(100% - 24px), 460px);
     gap: 8px;
     padding: 8px 10px;
-    border-radius: var(--shape-xl);
+    border-radius: 0;
   }
   .brand {
     min-height: 44px;
@@ -632,7 +645,7 @@ main {
     min-width: 44px;
     height: 44px;
     padding: 0;
-    border-radius: 18px;
+    border-radius: 0;
   }
   .top-nav a > span:last-child,
   #theme-label {

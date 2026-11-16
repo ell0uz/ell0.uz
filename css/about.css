@@ -38,7 +38,7 @@
   background: var(--content-card-surface, var(--card-bg));
   border: 1px solid
     color-mix(in srgb, var(--content-card-accent, var(--card-edge)) 42%, var(--card-edge));
-  border-radius: var(--shape-xl);
+  border-radius: 0;
   padding: clamp(24px, 3.5vw, 36px);
   box-shadow: var(--elevation-2), inset 0 1px 0 rgba(255, 255, 255, 0.12);
   -webkit-backdrop-filter: blur(10px) saturate(1.25);
@@ -66,7 +66,7 @@
 .content-eyebrow {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 8px;
   color: var(--muted);
   font-family: var(--font-display);
   font-size: clamp(0.8rem, 1.9vw, 0.98rem);
@@ -106,7 +106,7 @@
   min-width: 0;
   padding: clamp(16px, 2.5vw, 24px);
   border: 1px solid color-mix(in srgb, var(--accent) 42%, var(--card-edge));
-  border-radius: var(--shape-lg);
+  border-radius: 0;
   background: color-mix(in srgb, var(--md-sys-color-surface-container-low) 82%, transparent);
 }
 .content-tile h3 {
@@ -151,7 +151,7 @@
   position: absolute;
   inset: 0;
   z-index: 0;
-  border-radius: inherit;
+  border-radius: 0;
   pointer-events: none;
   background: radial-gradient(
     240px circle at var(--mx, 50%) var(--my, 50%),
@@ -202,7 +202,7 @@
   inset: 0;
   z-index: 3;
   border: 1px solid var(--accent);
-  border-radius: inherit;
+  border-radius: 0;
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.24s ease;
@@ -260,12 +260,20 @@
 .about-eyebrow {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 8px;
   font-family: var(--font-display);
   font-weight: 500;
   font-size: clamp(0.8rem, 1.9vw, 0.98rem);
   letter-spacing: 0.04em;
   color: var(--muted);
+}
+.about-eyebrow .dot,
+.content-eyebrow .dot {
+  width: 6px;
+  height: 6px;
+  flex: 0 0 auto;
+  border-radius: 50%;
+  background: var(--accent);
 }
 .about-title {
   font-family: var(--font-display);
@@ -318,7 +326,7 @@
   gap: 12px;
   padding: 18px;
   border: 1px solid var(--md-sys-color-outline-variant);
-  border-radius: 24px;
+  border-radius: 0;
   background: color-mix(
     in srgb,
     var(--md-sys-color-surface-container-low) 86%,
@@ -356,7 +364,7 @@
 .github-activity-heading a:focus-visible {
   outline: 2px solid var(--md-sys-color-primary);
   outline-offset: 3px;
-  border-radius: var(--shape-xs);
+  border-radius: 0;
 }
 .github-activity img {
   display: block;
@@ -370,7 +378,7 @@
   min-height: 92px;
   padding: 16px;
   border: 1px dashed var(--md-sys-color-outline);
-  border-radius: var(--shape-lg);
+  border-radius: 0;
   background: var(--md-sys-color-surface-container);
 }
 .github-placeholder-mark {
@@ -379,7 +387,7 @@
   place-items: center;
   width: 44px;
   height: 44px;
-  border-radius: var(--shape-md);
+  border-radius: 0;
   background: var(--md-sys-color-primary-container);
   color: var(--md-sys-color-on-primary-container);
   font-family: var(--font-text);
@@ -401,7 +409,7 @@
   gap: 14px;
   padding: 14px 16px;
   border: 1px solid var(--md-sys-color-outline-variant);
-  border-radius: 22px;
+  border-radius: 0;
   background: var(--md-sys-color-surface-container-low);
 }
 .discord-avatar-frame {
@@ -498,7 +506,7 @@
 .discord-profile-link:focus-visible {
   outline: 2px solid var(--md-sys-color-primary);
   outline-offset: 3px;
-  border-radius: var(--shape-xs);
+  border-radius: 0;
 }
 .inline-link {
   color: var(--accent);
@@ -522,7 +530,7 @@
   .content-card,
   .about-inner {
     width: 100%;
-    border-radius: var(--shape-xl);
+    border-radius: 0;
   }
   .discord-presence {
     grid-template-columns: auto minmax(0, 1fr);

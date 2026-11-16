@@ -10,6 +10,7 @@
     meteors = [];
   const mouse = { x: 0.5, y: 0.5 };
   const cards = [...document.querySelectorAll('.content-card')];
+  const canTiltCards = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
   let skyProgress = 0;
   let lastSkyFrameTime = 0;
   const themeToggle = document.getElementById('theme-toggle');
@@ -255,21 +256,27 @@
     mouse.x = e.clientX / Math.max(W, 1);
     mouse.y = e.clientY / Math.max(H, 1);
     const card = e.target instanceof Element ? e.target.closest('.content-card') : null;
-    if (!card || RM || e.pointerType === 'touch') return;
+    if (RM || !canTiltCards || e.pointerType === 'touch') return;
+    for (const card of cards) {
+      const rect = card.getBoundingClientRect();
+      const centerX = rect.left + rect.width / 2;
+      const centerY = rect.top + rect.height / 2;
+      const rx = Math.max(-2, Math.min(2, ((centerY - e.clientY) / Math.max(H, 1)) * 4));
+      const ry = Math.max(-2, Math.min(2, ((e.clientX - centerX) / Math.max(W, 1)) * 4));
+      card.style.setProperty('--rx', rx.toFixed(2) + 'deg');
+      card.style.setProperty('--ry', ry.toFixed(2) + 'deg');
+    }
+    if (!card) return;
     const rect = card.getBoundingClientRect();
     const x = Math.min(1, Math.max(0, (e.clientX - rect.left) / Math.max(rect.width, 1)));
     const y = Math.min(1, Math.max(0, (e.clientY - rect.top) / Math.max(rect.height, 1)));
     card.style.setProperty('--mx', (x * 100).toFixed(1) + '%');
     card.style.setProperty('--my', (y * 100).toFixed(1) + '%');
-    card.style.setProperty('--rx', ((0.5 - y) * 2.4).toFixed(2) + 'deg');
-    card.style.setProperty('--ry', ((x - 0.5) * 3).toFixed(2) + 'deg');
   });
   cards.forEach((card) => {
     card.addEventListener('pointerenter', () => card.classList.add('spotlight-active'));
     card.addEventListener('pointerleave', () => {
       card.classList.remove('spotlight-active');
-      card.style.setProperty('--rx', '0deg');
-      card.style.setProperty('--ry', '0deg');
     });
     card.addEventListener('pointerdown', (e) => {
       if (RM || (e.pointerType === 'mouse' && e.button !== 0)) return;
@@ -284,6 +291,13 @@
     });
     card.addEventListener('animationend', (e) => {
       if (e.animationName === 'screenPress') card.classList.remove('pressing');
+    });
+  });
+  window.addEventListener('pointerleave', (e) => {
+    if (RM || !canTiltCards || e.pointerType === 'touch') return;
+    cards.forEach((card) => {
+      card.style.setProperty('--rx', '0deg');
+      card.style.setProperty('--ry', '0deg');
     });
   });
   resize();
