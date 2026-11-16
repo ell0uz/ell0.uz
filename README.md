@@ -12,7 +12,8 @@ alongside the page.
 
 The header theme switch remembers the selected dark or light theme. The site uses Material
 3-inspired tonal surfaces, with its aqua scroll palette active only in light mode. The scrollbar and
-animated starfield follow the current theme.
+animated starfield follow the current theme. Once a content card is in view, the page background is
+tinted by its accent in either theme; dark mode keeps that tint subdued.
 
 ## Adding a content section
 

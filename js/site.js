@@ -37,6 +37,30 @@
       .getPropertyValue('--accent-rgb')
       .trim();
   }
+  function updatePageAccent() {
+    const viewportCenter = window.innerHeight / 2;
+    let activeCard = null;
+    let nearestDistance = Infinity;
+    for (const card of cards) {
+      const rect = card.getBoundingClientRect();
+      const distance =
+        viewportCenter < rect.top
+          ? rect.top - viewportCenter
+          : viewportCenter > rect.bottom
+            ? viewportCenter - rect.bottom
+            : 0;
+      if (distance < nearestDistance) {
+        activeCard = card;
+        nearestDistance = distance;
+      }
+    }
+    if (activeCard) {
+      document.documentElement.style.setProperty(
+        '--page-accent',
+        getComputedStyle(activeCard).getPropertyValue('--accent').trim(),
+      );
+    }
+  }
   function setTheme(theme) {
     document.documentElement.dataset.theme = theme;
     updateThemeControl();
@@ -441,6 +465,7 @@
     const scrolled = about.offsetTop < window.scrollY + window.innerHeight * 0.55;
     document.body.classList.toggle('scrolled', scrolled);
     document.documentElement.dataset.scrolled = String(scrolled);
+    updatePageAccent();
     updateThemeColor();
     if (scrolled) {
       const n = targetCount();

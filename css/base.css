@@ -48,6 +48,7 @@
   --md-sys-color-on-primary: #003544;
   --md-sys-color-primary-container: #004d63;
   --md-sys-color-on-primary-container: #b8eaff;
+  --page-accent: var(--md-sys-color-primary);
   --accent-rgb: 117, 209, 244;
   --md-sys-color-background: #101416;
   --md-sys-color-surface: #101416;
@@ -104,7 +105,7 @@
   --accent-rgb: 0, 103, 130;
 }
 :root[data-theme='light'] body.scrolled {
-  --md-sys-color-background: #78dee2;
+  --md-sys-color-background: color-mix(in srgb, var(--page-accent) 48%, #78dee2);
   --md-sys-color-surface: #85e2e5;
   --md-sys-color-surface-container-lowest: #b1f1f2;
   --md-sys-color-surface-container-low: #a5ebed;
@@ -122,6 +123,9 @@
   --muted: var(--md-sys-color-on-surface-variant);
   --faint: color-mix(in srgb, var(--md-sys-color-on-surface-variant) 78%, transparent);
   --scrollbar-track: var(--md-sys-color-surface-container);
+}
+:root[data-theme='dark'][data-scrolled='true'] {
+  --md-sys-color-background: color-mix(in srgb, var(--page-accent) 30%, #101416);
 }
 :root[data-theme='light'][data-scrolled='true'] {
   --scrollbar-track: #9be6e8;
