@@ -15,6 +15,9 @@ The header theme switch remembers the selected dark or light theme. The site use
 animated starfield follow the current theme. Once a content card is in view, the page background is
 tinted by its accent in either theme; dark mode keeps that tint subdued.
 
+On constrained or touch-first devices, the page automatically reduces the starfield workload and
+disables costly grain and blur effects.
+
 ## Adding a content section
 
 `index.html` contains a reusable starter inside `<template id="content-section-template">`. Copy its

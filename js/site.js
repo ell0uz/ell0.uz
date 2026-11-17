@@ -1,5 +1,13 @@
 (() => {
   const RM = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+  const LOW_POWER =
+    Number(navigator.deviceMemory || Infinity) <= 4 ||
+    Number(navigator.hardwareConcurrency || Infinity) <= 4 ||
+    Boolean(connection && connection.saveData) ||
+    window.matchMedia('(pointer: coarse)').matches;
+  if (LOW_POWER) document.documentElement.dataset.performance = 'low';
+  const FRAME_INTERVAL = 1000 / (LOW_POWER ? 24 : 30);
 
   /* ---------- animated starfield background ---------- */
   const canvas = document.getElementById('bg');
@@ -10,9 +18,12 @@
     meteors = [];
   const mouse = { x: 0.5, y: 0.5 };
   const cards = [...document.querySelectorAll('.content-card')];
-  const canTiltCards = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+  const canTiltCards =
+    !LOW_POWER && window.matchMedia('(hover: hover) and (pointer: fine)').matches;
   let skyProgress = 0;
   let lastSkyFrameTime = 0;
+  let lastDrawTime = 0;
+  let animationFrame = 0;
   const themeToggle = document.getElementById('theme-toggle');
   const themeIcon = document.getElementById('theme-icon');
   const themeLabel = document.getElementById('theme-label');
@@ -80,6 +91,12 @@
     setTheme(document.documentElement.dataset.theme === 'light' ? 'dark' : 'light');
   });
   const targetCount = () => {
+    if (LOW_POWER) {
+      const base = Math.min(100, Math.round((W * H) / 12000));
+      return document.body.classList.contains('scrolled')
+        ? Math.min(170, Math.round(base * 1.7))
+        : base;
+    }
     const base = Math.min(260, Math.round((W * H) / 8000));
     return document.body.classList.contains('scrolled')
       ? Math.min(420, Math.round(base * 1.7))
@@ -107,7 +124,7 @@
      rescale is debounced so resize storms don't thrash. */
   let resizeTimer = null;
   function applyResize() {
-    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    const dpr = Math.min(window.devicePixelRatio || 1, LOW_POWER ? 1 : 1.5);
     const oldW = W,
       oldH = H;
     W = window.innerWidth;
@@ -160,6 +177,7 @@
     const lightTheme = document.documentElement.dataset.theme === 'light';
     const targetSkyProgress = document.body.classList.contains('scrolled') ? 1 : 0;
     const frameTime = lastSkyFrameTime ? Math.min(t - lastSkyFrameTime, 100) : 16;
+    const frameScale = frameTime / 16;
     lastSkyFrameTime = t;
     const blend = RM ? 1 : 1 - Math.exp(-frameTime / 220);
     skyProgress += (targetSkyProgress - skyProgress) * blend;
@@ -175,25 +193,48 @@
     const linkDistanceSquared = linkDistance * linkDistance;
     const maxLinkOpacity = 0.2 + 0.06 * skyProgress;
     const linkBuckets = [[], [], [], [], [], []];
+    const gridWidth = Math.ceil(W / linkDistance) + 3;
+    const linkGrid = new Map();
+    for (let i = 0; i < points.length; i++) {
+      const point = points[i];
+      const cellX = Math.floor(point.x / linkDistance) + 1;
+      const cellY = Math.floor(point.y / linkDistance) + 1;
+      const key = cellY * gridWidth + cellX;
+      let cell = linkGrid.get(key);
+      if (!cell) {
+        cell = [];
+        linkGrid.set(key, cell);
+      }
+      cell.push(i);
+    }
     for (let i = 0; i < points.length; i++) {
       const start = points[i];
-      for (let j = i + 1; j < points.length; j++) {
-        const end = points[j];
-        const dx = start.x - end.x;
-        const dy = start.y - end.y;
-        const distanceSquared = dx * dx + dy * dy;
-        if (distanceSquared >= linkDistanceSquared) continue;
-        const distance = Math.sqrt(distanceSquared);
-        const opacity =
-          maxLinkOpacity *
-          (1 - distance / linkDistance) *
-          Math.min(start.opacity, end.opacity);
-        if (opacity < 0.01) continue;
-        const bucket = Math.min(
-          linkBuckets.length - 1,
-          Math.floor((opacity / maxLinkOpacity) * linkBuckets.length),
-        );
-        linkBuckets[bucket].push(start, end);
+      const cellX = Math.floor(start.x / linkDistance) + 1;
+      const cellY = Math.floor(start.y / linkDistance) + 1;
+      for (let offsetY = -1; offsetY <= 1; offsetY++) {
+        for (let offsetX = -1; offsetX <= 1; offsetX++) {
+          const cell = linkGrid.get((cellY + offsetY) * gridWidth + cellX + offsetX);
+          if (!cell) continue;
+          for (const j of cell) {
+            if (j <= i) continue;
+            const end = points[j];
+            const dx = start.x - end.x;
+            const dy = start.y - end.y;
+            const distanceSquared = dx * dx + dy * dy;
+            if (distanceSquared >= linkDistanceSquared) continue;
+            const distance = Math.sqrt(distanceSquared);
+            const opacity =
+              maxLinkOpacity *
+              (1 - distance / linkDistance) *
+              Math.min(start.opacity, end.opacity);
+            if (opacity < 0.01) continue;
+            const bucket = Math.min(
+              linkBuckets.length - 1,
+              Math.floor((opacity / maxLinkOpacity) * linkBuckets.length),
+            );
+            linkBuckets[bucket].push(start, end);
+          }
+        }
       }
     }
     ctx.strokeStyle = 'rgb(' + accentRgb + ')';
@@ -236,16 +277,16 @@
       );
       ctx.fill();
       if (!RM) {
-        s.x += s.vx * aggro;
-        s.y += s.vy * aggro;
+        s.x += s.vx * aggro * frameScale;
+        s.y += s.vy * aggro * frameScale;
         if (s.x < -4) s.x = W + 4;
         else if (s.x > W + 4) s.x = -4;
         if (s.y < -4) s.y = H + 4;
         else if (s.y > H + 4) s.y = -4;
       }
     }
-    if (!RM) {
-      meteorTimer -= 16;
+    if (!RM && !LOW_POWER) {
+      meteorTimer -= frameTime;
       if (meteorTimer <= 0) {
         spawnMeteor();
         meteorTimer = 3500 + Math.random() * 5500;
@@ -253,9 +294,9 @@
     }
     for (let i = meteors.length - 1; i >= 0; i--) {
       const m = meteors[i];
-      m.x += m.vx;
-      m.y += m.vy;
-      m.life -= 0.012;
+      m.x += m.vx * frameScale;
+      m.y += m.vy * frameScale;
+      m.life -= 0.012 * frameScale;
       if (m.life <= 0 || m.y > H + 40) {
         meteors.splice(i, 1);
         continue;
@@ -273,8 +314,31 @@
       ctx.stroke();
     }
     ctx.globalAlpha = 1;
-    if (!RM) requestAnimationFrame(draw);
+    scheduleDraw();
   }
+  function scheduleDraw() {
+    if (RM || document.hidden || animationFrame) return;
+    animationFrame = requestAnimationFrame((t) => {
+      animationFrame = 0;
+      if (t - lastDrawTime < FRAME_INTERVAL) {
+        scheduleDraw();
+        return;
+      }
+      lastDrawTime = t;
+      draw(t);
+    });
+  }
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) {
+      cancelAnimationFrame(animationFrame);
+      animationFrame = 0;
+      return;
+    }
+    lastSkyFrameTime = 0;
+    lastDrawTime = 0;
+    if (RM) draw(performance.now());
+    else scheduleDraw();
+  });
   window.addEventListener('resize', resize);
   window.addEventListener('pointermove', (e) => {
     mouse.x = e.clientX / Math.max(W, 1);
@@ -325,7 +389,8 @@
     });
   });
   resize();
-  requestAnimationFrame(draw);
+  if (RM) draw(performance.now());
+  else scheduleDraw();
 
   /* ---------- rotating texts, bottom of center ---------- */
   const texts = [

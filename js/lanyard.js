@@ -40,7 +40,12 @@
     );
   }
 
+  let pollTimer = null;
+  let requestInFlight = false;
+
   async function refreshDiscordPresence() {
+    if (requestInFlight || document.hidden) return;
+    requestInFlight = true;
     try {
       const response = await fetch(lanyardUrl, { cache: 'no-store' });
       if (!response.ok) {
@@ -79,9 +84,36 @@
       presenceStatus.textContent = 'Unavailable';
       presenceActivity.textContent = 'Could not load Discord presence. Please try again later.';
       console.error('Lanyard presence request failed.', error);
+    } finally {
+      requestInFlight = false;
     }
   }
 
-  refreshDiscordPresence();
-  window.setInterval(refreshDiscordPresence, 60000);
+  function startPolling() {
+    if (pollTimer || document.hidden) return;
+    refreshDiscordPresence();
+    pollTimer = window.setInterval(refreshDiscordPresence, 60000);
+  }
+
+  function stopPolling() {
+    if (!pollTimer) return;
+    window.clearInterval(pollTimer);
+    pollTimer = null;
+  }
+
+  const visibilityObserver = new IntersectionObserver(
+    ([entry]) => {
+      if (entry.isIntersecting) startPolling();
+      else stopPolling();
+    },
+    { rootMargin: '100px' },
+  );
+  visibilityObserver.observe(presence);
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) stopPolling();
+    else {
+      const rect = presence.getBoundingClientRect();
+      if (rect.bottom > -100 && rect.top < window.innerHeight + 100) startPolling();
+    }
+  });
 })();

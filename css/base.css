@@ -677,6 +677,23 @@ main {
     display: none;
   }
 }
+/* Simplify costly decorative layers on constrained or touch-first devices. */
+:root[data-performance='low'] .grain {
+  display: none;
+}
+:root[data-performance='low'] .topbar,
+:root[data-performance='low'] .content-card {
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+}
+:root[data-performance='low'] .content-card {
+  transform: none;
+}
+:root[data-performance='low'] .content-card::before,
+:root[data-performance='low'] .content-card::after,
+:root[data-performance='low'] .card-edge-glow {
+  display: none;
+}
 /* ---------- reveal on scroll: big headers first, paragraphs after, sliding up from the bottom ---------- */
 .reveal {
   opacity: 0;
