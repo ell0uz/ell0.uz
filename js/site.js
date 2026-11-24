@@ -92,6 +92,7 @@
   });
   const targetCount = () => {
     if (LOW_POWER) {
+      // ~33% fewer stars than normal: divisor 12000 vs 8000, caps at 100/170
       const base = Math.min(100, Math.round((W * H) / 12000));
       return document.body.classList.contains('scrolled')
         ? Math.min(170, Math.round(base * 1.7))
@@ -193,7 +194,7 @@
     const linkDistanceSquared = linkDistance * linkDistance;
     const maxLinkOpacity = 0.2 + 0.06 * skyProgress;
     const linkBuckets = [[], [], [], [], [], []];
-    const gridWidth = Math.ceil(W / linkDistance) + 3;
+    const gridWidth = Math.max(1, Math.ceil(W / linkDistance)) + 3;
     const linkGrid = new Map();
     for (let i = 0; i < points.length; i++) {
       const point = points[i];
